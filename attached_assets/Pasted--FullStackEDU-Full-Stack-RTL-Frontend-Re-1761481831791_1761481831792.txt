@@ -1,0 +1,337 @@
+בנה אפליקציית ווב מלאה בשם FullStackEDU ללימוד Full-Stack, בשפה העברית וביישור RTL, עם Frontend ב-React (Vite) ו-Backend ב-Node.js/Express ו-MongoDB (Mongoose). האפליקציה תאפשר הרשמה/כניסה, מעקב התקדמות בכל קורס ושיעור, שאלות אמריקאיות בסוף כל שיעור, חסימת מעבר לשיעור הבא עד למענה נכון על כל 5 השאלות, והצגת היסטוריית למידה לכל משתמש.
+
+טכנולוגיות וארכיטקטורה
+
+Frontend: React + Vite, TypeScript, React Router, Context/Redux (לבחירתך) לניהול מצב, RTL מלא (dir="rtl", lang="he"), Tailwind CSS או CSS מודרני.
+
+Backend: Node.js + Express, TypeScript (עדיף), JWT Auth, bcrypt להצפנת סיסמאות, Mongoose ל-MongoDB.
+
+DB: MongoDB עם קולקציות: users, courses, lessons, quizzes, progress.
+
+אימות: JWT (Access + Refresh), Middleware לנתיבי API מוגנים.
+
+ולידציה: Zod/Joi לסכמות בקלטי API.
+
+בדיקות נכונות לשאלות: בצד השרת בלבד (אין להחזיר תשובות נכונות ללקוח).
+
+פריסת קבצים (Monorepo):
+
+/fullstackedu
+  /client  (React + Vite)
+  /server  (Express + Mongoose)
+  package.json (scripts להרצה מקבילה)
+
+Scripts
+
+בשורש:
+
+"dev": "concurrently \"pnpm --filter server dev\" \"pnpm --filter client dev\""
+
+ב־server: "dev": "tsx watch src/index.ts"
+
+ב־client: "dev": "vite"
+
+מודל נתונים (Mongoose)
+
+User: { email, passwordHash, displayName, createdAt }
+
+Course: { slug, titleHE, descriptionHE, order, topics: [string], levelRange: "מתחיל–בינוני+", coverIcon }
+
+Lesson: { courseSlug, slug, titleHE, order, contentHE (HTML/MD), examples: [{titleHE, code, expectedOutput}], requiresScore: 100 }
+
+Quiz: { lessonId, questions: [{ promptHE, choicesHE: [string], correctIndex: number }] }
+
+Progress: { userId, courseSlug, lessonSlug, status: "locked"|"in-progress"|"done", score: number, answers: [{questionIndex, chosenIndex, isCorrect}], updatedAt }
+
+אינדקסים מתאימים על userId+courseSlug+lessonSlug.
+
+Endpoints (דוגמא)
+
+Auth:
+
+POST /api/auth/register {email, password, displayName}
+
+POST /api/auth/login {email, password} → JWT
+
+POST /api/auth/refresh
+
+Courses & Lessons:
+
+GET /api/courses → רשימת קורסים + אחוז התקדמות למשתמש הנוכחי
+
+GET /api/courses/:slug/lessons → רשימת שיעורים (כולל סטטוס נעול/פתוח)
+
+GET /api/lessons/:lessonSlug → תוכן שיעור ללא פתרונות
+
+GET /api/lessons/:lessonSlug/quiz → 5 שאלות (ללא ציון התשובה הנכונה)
+
+Progress & Quiz:
+
+POST /api/lessons/:lessonSlug/quiz/submit {answers:[index,...]}
+
+השרת בודק, מחזיר {correctCount, score, passed: boolean}.
+
+אם passed === true (כל 5 נכונות), עדכן Progress ל-done ושחרר את השיעור הבא.
+
+GET /api/progress/overview → אחוז התקדמות כללי + לפי קורס.
+
+Middleware:
+
+requireAuth לכל נתיבי הלמידה/התקדמות.
+
+lockGuard שמוודא ששיעור N פתוח רק אם שיעור N-1 done.
+
+לוגיקת פתיחה/נעילה
+
+שיעור ראשון בכל קורס: פתוח תמיד.
+
+כל שיעור נוסף: locked עד שהשיעור הקודם done.
+
+done = 5/5 נכונות (ציון 100). ניסיון חוזר מותר.
+
+Frontend – חוויית משתמש (RTL, עברית)
+
+דף בית/נחיתה: ״FullStackEDU״, CTA להרשמה/כניסה.
+
+דפי Auth בעברית, שדות מימין לשמאל.
+
+Dashboard לאחר כניסה:
+
+בראש הדף: מחוון התקדמות כולל (אחוז משוקלל של כל הקורסים).
+
+מתחת: כרטיסיות קורסים (Grid), בכל כרטיס: שם קורס, תיאור קצר, מחוון התקדמות בקורס, כפתור ״כניסה לקורס״.
+
+דף קורס: רשימת שיעורים אנכית עם סטטוס (ננעל/פתוח/הושלם).
+
+דף שיעור:
+
+כותרת, תוכן תיאורטי קצר ומדויק בנושא יחיד.
+
+״1-2 דוגמאות״ עם קוד + ״תוצאה צפויה״.
+
+כפתור ״לשאלון״.
+
+דף שאלון (5 אמריקאיות): טופס בחירות יחידות (radio).
+
+שלח → תצוגת תוצאה מידית לכל שאלה (נכון/לא נכון) + סיכום.
+
+אם לא כל התשובות נכונות, הצע ״נסה שוב״; אם כולן נכונות, הצג ״כל הכבוד! השיעור נפתח״, ופתח את השיעור הבא.
+
+דף ״היסטוריית למידה״: טבלה לפי קורס/שיעור, תוצאה/תאריך.
+
+נגישות ושפה
+
+dir="rtl" ב-<html>; כל הטקסטים בעברית.
+
+ניגודיות טובה, תוויות לטפסים, מקשי Tab, ARIA למרכיבים אינטראקטיביים.
+
+אבטחה
+
+סיסמאות: bcrypt.
+
+JWT ב-HTTP-Only cookies או Authorization header.
+
+אימות תשובות ובדיקת ציונים בצד השרת בלבד.
+
+זרימת הרשאה
+
+ללא JWT → רק דפי נחיתה/הרשמה/כניסה.
+
+עם JWT → Dashboard, קורסים, שיעורים, שאלונים ו-Progress.
+
+תכולת קורסים ושיעורים
+
+שבעה קורסים: HTML, CSS, Bootstrap, JavaScript, React, Node.js, MongoDB.
+בכל קורס 8 שיעורים (מתחיל → בינוני+). שיעור 1 בכל קורס: התקנת סביבת העבודה ב-VS Code.
+
+HTML (8):
+
+התקנת VS Code ותוסף Live Server; מבנה קובץ HTML בסיסי
+
+כותרות, פסקאות, רשימות
+
+קישורים ותמונות
+
+טבלאות
+
+טפסים בסיסיים (input, label, select)
+
+סמנטיקה (header, nav, main, footer, article, section)
+
+מולטימדיה (audio, video, iframe)
+
+פרויקט מיני: דף נחיתה בעברית (RTL)
+
+CSS (8):
+
+התקנת VS Code: הרחבות CSS ו-Prettier; חיבור קובץ CSS
+
+סלקטורים ומורכבים, תיבות (Box Model)
+
+טיפוגרפיה, צבעים, משתני CSS
+
+Flexbox
+
+Grid
+
+מיקום (Position), Z-index, רקעים
+
+רספונסיביות ו-Media Queries (RTL)
+
+מיניפרויקט: דף רספונסיבי מלא בעברית
+
+Bootstrap (8):
+
+התקנת VS Code; הכללת Bootstrap (CDN/NPМ)
+
+Grid System ו-Containers
+
+טיפוגרפיה ועזרי עיצוב
+
+רכיבים: Navbar, Cards
+
+טפסים וקלט
+
+מודאלים ו-Alerts
+
+Utilities מתקדמים ו-RTL
+
+פרויקט מיני: דף קורסים בכרטיסיות
+
+JavaScript (8):
+
+התקנת VS Code ותוסף Debugger for Chrome; <script> והשקפה כללית
+
+משתנים, טיפוסים, אופרטורים
+
+פונקציות, Scope, Arrow
+
+מערכים ואובייקטים
+
+DOM API, אירועים והקשבה
+
+Fetch API ו-JSON
+
+מודולים (ES Modules)
+
+פרויקט מיני: טופס ולידציה ושמירה ב-localStorage
+
+React (8):
+
+התקנת VS Code; יצירת פרויקט Vite React; קבצי בסיס
+
+קומפוננטות ו-Props
+
+State ו-Events
+
+React Router (דפי קורס/שיעור/שאלון)
+
+Context/Redux לניהול משתמש/התקדמות
+
+טפסים מבוקרים ושאלונים
+
+קריאות API ל-Express, טיפול שגיאות ו-Loading
+
+פרויקט מיני: לוח קורסים עם מחווני התקדמות
+
+Node.js (8):
+
+התקנת VS Code; Node + NPM; מבנה פרויקט Express
+
+נתיבים בסיסיים, Middleware
+
+קונפיגורציה, dotenv, לוגינג
+
+JWT Auth + bcrypt
+
+מבנה RESTful, בקרות קורסים/שיעורים
+
+ולידציה עם Zod/Joi
+
+טיפול בשגיאות, קודים סטנדרטיים
+
+פרויקט מיני: API שאלונים עם בדיקת תשובות
+
+MongoDB (8):
+
+התקנת VS Code; חיבור ל-MongoDB Atlas/Local; Compass
+
+סכמות Mongoose, יחסים (Ref/Embed)
+
+שאילתות בסיסיות ומתקדמות
+
+אינדקסים וביצועים בסיסיים
+
+טרנזקציות/Atomicity (במקומות נדרשים)
+
+זרימת Progress: עדכון ונעילה
+
+גיבוי/זרעי נתונים (Seed)
+
+פרויקט מיני: דשבורד התקדמות פר-משתמש
+
+דוגמאות ותוצאות בכל שיעור
+
+בכל שיעור:
+
+1–2 דוגמאות קוד קצרות (בכרטיס קוד) + ״תוצאה צפויה״ (טקסט/תמונה קצרה).
+
+דגש על נושא יחיד בלבד.
+
+שאלון לכל שיעור (5 שאלות)
+
+בניית 5 שאלות אמריקאיות.
+
+Quiz.questions[i] = { promptHE, choicesHE[4], correctIndex }.
+
+Endpoint הבדיקה בשרת משווה ויוצר ציון.
+
+רק אם 5/5 → Progress.status="done" ופתיחת השיעור הבא.
+
+UI בעברית (מחרוזות לדוגמה)
+
+כותרת אתר: "FullStackEDU – לומדים פולסטאק בעברית"
+
+כפתורים: ״הירשם״, ״התחבר״, ״כניסה לקורס״, ״התחל שיעור״, ״לשאלון״, ״שלח״, ״נסה שוב״
+
+התראות: ״ענית נכון!״, ״יש תשובות שגויות – נסה שוב״, ״השיעור נפתח!״
+
+מחוונים: ״התקדמות כוללת״, ״התקדמות בקורס״
+
+דף זרעי נתונים (Seed)
+
+צור סקריפט server/scripts/seed.ts שמכניס:
+
+7 קורסים עם 8 שיעורים כל אחד (כפי שמופיע לעיל).
+
+לכל שיעור 5 שאלות אמריקאיות הדגמתיות.
+
+משתמש בדיקה: email: demo@fullstackedu.io, סיסמה: Demo1234!.
+
+מחווני התקדמות
+
+כללי: ממוצע אחוזי ה-done מכל השיעורים בכל הקורסים.
+
+בקורס: אחוז שיעורים done מתוך 8.
+
+עיצוב
+
+RTL מלא, פונט נעים לקריאה, כרטיסי קורסים (Card), Progress Bars.
+
+רספונסיבי: מובייל/דסקטופ.
+
+קריטריוני קבלה
+
+לא ניתן לגשת לשיעור הבא לפני 5/5 בשאלון השיעור הנוכחי.
+
+תשובות נכונות לא זולגות ל-Client.
+
+מחווני התקדמות עובדים (כללי ולפי קורס).
+
+היסטוריית למידה מציגה שיעורים, ציון ותאריך.
+
+כל הממשק בעברית, RTL מלא.
+
+שיעור 1 בכל קורס הוא התקנת VS Code והכנת סביבת העבודה.
+
+פרויקט רץ ב-Replit בפקודה אחת מהשורש (pnpm dev או npm run dev) ומעלה גם שרת וגם קליינט.
