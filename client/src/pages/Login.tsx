@@ -31,7 +31,8 @@ export default function Login() {
         title: 'התחברת בהצלחה!',
         description: `שלום ${response.user.displayName}`,
       });
-      setLocation('/dashboard');
+      // Use hard redirect to ensure state is loaded from localStorage
+      window.location.href = '/dashboard';
     } catch (error: any) {
       toast({
         variant: 'destructive',

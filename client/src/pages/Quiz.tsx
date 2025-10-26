@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useQuery, useMutation } from '@tanstack/react-query';
 import { useRoute, useLocation, Link } from 'wouter';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -30,12 +30,14 @@ export default function Quiz() {
   const { data: quiz, isLoading } = useQuery<ClientQuiz>({
     queryKey: ['/api/lessons', lessonSlug, 'quiz'],
     enabled: !!lessonSlug,
-    onSuccess: (data) => {
-      if (data && selectedAnswers.length === 0) {
-        setSelectedAnswers(Array(data.questions.length).fill(null));
-      }
-    },
   });
+
+  // Initialize selectedAnswers when quiz loads
+  useEffect(() => {
+    if (quiz && quiz.questions && quiz.questions.length > 0 && selectedAnswers.length === 0) {
+      setSelectedAnswers(Array(quiz.questions.length).fill(null));
+    }
+  }, [quiz]);
 
   const submitMutation = useMutation({
     mutationFn: async (answers: number[]) => {
@@ -70,7 +72,7 @@ export default function Quiz() {
     },
   });
 
-  if (!lessonSlug || !quiz) {
+  if (!lessonSlug || isLoading || !quiz || !quiz.questions || quiz.questions.length === 0) {
     return <div className="text-center py-12">טוען שאלון...</div>;
   }
 
@@ -237,18 +239,7 @@ export default function Quiz() {
     );
   }
 
-  // Quiz View
-  if (isLoading) {
-    return (
-      <div className="min-h-[calc(100vh-4rem)] bg-background">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <Skeleton className="h-12 w-full mb-8" />
-          <Skeleton className="h-64 w-full" />
-        </div>
-      </div>
-    );
-  }
-
+  // Quiz View - All guards passed, quiz and questions are guaranteed to exist
   const question = quiz.questions[currentQuestion];
   const isLastQuestion = currentQuestion === quiz.questions.length - 1;
   

@@ -330,10 +330,8 @@ function generateQuizQuestions(courseSlug: string, lessonOrder: number) {
   }));
 });
 
-async function seed() {
+export async function seed() {
   try {
-    await connectDB();
-    
     console.log('🗑️  Clearing existing data...');
     await Promise.all([
       User.deleteMany({}),
@@ -376,18 +374,10 @@ async function seed() {
       }
     }
 
-    console.log('\n✅ Seed completed successfully!');
-    console.log(`\n📧 Demo user credentials:`);
-    console.log(`   Email: ${DEMO_USER.email}`);
-    console.log(`   Password: ${DEMO_USER.password}`);
-    
-    await mongoose.disconnect();
-    process.exit(0);
+    console.log('✅ Seed completed!');
+    console.log(`📧 Demo user: ${DEMO_USER.email} / ${DEMO_USER.password}`);
   } catch (error) {
     console.error('❌ Seed failed:', error);
-    await mongoose.disconnect();
-    process.exit(1);
+    throw error;
   }
 }
-
-seed();
