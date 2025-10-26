@@ -7,6 +7,7 @@ import Course from './models/Course';
 import Lesson from './models/Lesson';
 import Quiz from './models/Quiz';
 import Progress from './models/Progress';
+import { Comment } from './models/Comment';
 import { authMiddleware, generateToken, type AuthRequest } from './middleware/auth';
 import { connectDB } from './db';
 
@@ -521,6 +522,124 @@ export async function registerRoutes(app: Express): Promise<Server> {
       return res.json(history);
     } catch (error) {
       console.error('Get learning history error:', error);
+      return res.status(500).json({ message: 'שגיאת שרת' });
+    }
+  });
+
+  // ============================================
+  // Comments/Discussion Routes
+  // ============================================
+  
+  app.get('/api/lessons/:slug/comments', authMiddleware, async (req: AuthRequest, res) => {
+    try {
+      const { slug } = req.params;
+      
+      const lesson = await Lesson.findOne({ slug });
+      if (!lesson) {
+        return res.status(404).json({ message: 'שיעור לא נמצא' });
+      }
+      
+      const comments = await Comment.find({ lessonSlug: slug })
+        .sort({ createdAt: 1 });
+      
+      const formattedComments = comments.map(comment => ({
+        _id: comment._id.toString(),
+        lessonSlug: comment.lessonSlug,
+        userId: comment.userId.toString(),
+        userDisplayName: comment.userDisplayName,
+        content: comment.content,
+        isMentorResponse: comment.isMentorResponse,
+        parentCommentId: comment.parentCommentId?.toString() || null,
+        createdAt: comment.createdAt,
+        updatedAt: comment.updatedAt,
+      }));
+      
+      return res.json(formattedComments);
+    } catch (error) {
+      console.error('Get comments error:', error);
+      return res.status(500).json({ message: 'שגיאת שרת' });
+    }
+  });
+  
+  app.post('/api/lessons/:slug/comments', authMiddleware, async (req: AuthRequest, res) => {
+    try {
+      const { slug } = req.params;
+      const userId = req.userId!;
+      
+      const lesson = await Lesson.findOne({ slug });
+      if (!lesson) {
+        return res.status(404).json({ message: 'שיעור לא נמצא' });
+      }
+      
+      const validation = (await import('@shared/schema')).insertCommentSchema.safeParse({
+        ...req.body,
+        lessonSlug: slug,
+      });
+      
+      if (!validation.success) {
+        return res.status(400).json({ message: 'נתונים לא תקינים' });
+      }
+      
+      if (validation.data.parentCommentId) {
+        const parentComment = await Comment.findOne({
+          _id: validation.data.parentCommentId,
+          lessonSlug: slug,
+        });
+        if (!parentComment) {
+          return res.status(400).json({ message: 'הערת אב לא נמצאה באותו שיעור' });
+        }
+      }
+      
+      const user = await User.findById(userId);
+      if (!user) {
+        return res.status(404).json({ message: 'משתמש לא נמצא' });
+      }
+      
+      const comment = await Comment.create({
+        lessonSlug: slug,
+        userId,
+        userDisplayName: user.displayName,
+        content: validation.data.content,
+        isMentorResponse: false,
+        parentCommentId: validation.data.parentCommentId || null,
+      });
+      
+      return res.status(201).json({
+        _id: comment._id.toString(),
+        lessonSlug: comment.lessonSlug,
+        userId: comment.userId.toString(),
+        userDisplayName: comment.userDisplayName,
+        content: comment.content,
+        isMentorResponse: comment.isMentorResponse,
+        parentCommentId: comment.parentCommentId?.toString() || null,
+        createdAt: comment.createdAt,
+        updatedAt: comment.updatedAt,
+      });
+    } catch (error) {
+      console.error('Create comment error:', error);
+      return res.status(500).json({ message: 'שגיאת שרת' });
+    }
+  });
+  
+  app.delete('/api/comments/:commentId', authMiddleware, async (req: AuthRequest, res) => {
+    try {
+      const { commentId } = req.params;
+      const userId = req.userId!;
+      
+      const comment = await Comment.findById(commentId);
+      if (!comment) {
+        return res.status(404).json({ message: 'הערה לא נמצאה' });
+      }
+      
+      if (comment.userId.toString() !== userId) {
+        return res.status(403).json({ message: 'אין הרשאה למחוק הערה זו' });
+      }
+      
+      await Comment.deleteOne({ _id: commentId });
+      
+      return res.json({ message: 'ההערה נמחקה בהצלחה' });
+    } catch (error) {
+      console.error('Delete comment error:', error);
       return res.status(500).json({ message: 'שגיאת שרת' });
     }
   });

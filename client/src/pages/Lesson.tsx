@@ -3,6 +3,7 @@ import { useRoute, Link } from 'wouter';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
+import { LessonDiscussion } from '@/components/LessonDiscussion';
 import { ArrowRight, ArrowLeft, Code2 } from 'lucide-react';
 import type { Lesson } from '@shared/schema';
 
@@ -101,9 +102,14 @@ export default function LessonPage() {
           </div>
         )}
 
+        {/* Discussion Section */}
+        {!isLoading && lessonSlug && (
+          <LessonDiscussion lessonSlug={lessonSlug} />
+        )}
+
         {/* CTA to Quiz */}
         {!isLoading && (
-          <div className="sticky bottom-0 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80 border-t border-border py-6 -mx-4 px-4">
+          <div className="sticky bottom-0 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80 border-t border-border py-6 -mx-4 px-4 mt-8">
             <div className="max-w-4xl mx-auto">
               <Link href={`/quiz/${lessonSlug}`}>
                 <Button size="lg" className="w-full sm:w-auto sm:min-w-[300px] gap-2 text-lg" data-testid="button-go-to-quiz">

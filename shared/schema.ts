@@ -201,3 +201,27 @@ export const authResponseSchema = z.object({
 });
 
 export type AuthResponse = z.infer<typeof authResponseSchema>;
+
+// ============================================
+// Discussion/Comment Schema
+// ============================================
+export const commentSchema = z.object({
+  _id: z.string(),
+  lessonSlug: z.string(),
+  userId: z.string(),
+  userDisplayName: z.string(),
+  content: z.string(),
+  isMentorResponse: z.boolean(),
+  parentCommentId: z.string().nullable(),
+  createdAt: z.coerce.date(),
+  updatedAt: z.coerce.date(),
+});
+
+export const insertCommentSchema = z.object({
+  lessonSlug: z.string(),
+  content: z.string().min(3).max(1000),
+  parentCommentId: z.string().optional(),
+});
+
+export type Comment = z.infer<typeof commentSchema>;
+export type InsertComment = z.infer<typeof insertCommentSchema>;
