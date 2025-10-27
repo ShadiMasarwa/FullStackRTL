@@ -4,8 +4,9 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Form, FormControl, FormField, FormItem } from '@/components/ui/form';
+import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 import { Textarea } from '@/components/ui/textarea';
+import { Skeleton } from '@/components/ui/skeleton';
 import { useToast } from '@/hooks/use-toast';
 import { apiRequest, queryClient } from '@/lib/queryClient';
 import { MessageCircle, Send, Trash2, Reply } from 'lucide-react';
@@ -101,6 +102,13 @@ export function LessonDiscussion({ lessonSlug }: LessonDiscussionProps) {
     });
   };
 
+  const handleReplyToChange = (commentId: string | null) => {
+    if (replyingTo && replyingTo !== commentId) {
+      replyForm.reset();
+    }
+    setReplyingTo(commentId);
+  };
+
   const handleDelete = (commentId: string) => {
     if (confirm('האם אתה בטוח שברצונך למחוק את ההערה?')) {
       deleteMutation.mutate(commentId);
@@ -113,7 +121,33 @@ export function LessonDiscussion({ lessonSlug }: LessonDiscussionProps) {
     commentsArray.filter(c => c.parentCommentId === commentId);
 
   if (isLoading) {
-    return null;
+    return (
+      <Card className="mt-12">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2 text-right">
+            <MessageCircle className="h-5 w-5" />
+            <span>שאלות ותגובות</span>
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-6">
+          <div className="space-y-3">
+            <Skeleton className="h-24 w-full" />
+            <Skeleton className="h-10 w-32 mr-auto" />
+          </div>
+          <div className="space-y-4">
+            {[1, 2, 3].map((i) => (
+              <Card key={i}>
+                <CardContent className="p-4">
+                  <Skeleton className="h-4 w-32 mb-2 mr-auto" />
+                  <Skeleton className="h-16 w-full mb-2" />
+                  <Skeleton className="h-8 w-24 mr-auto" />
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
+    );
   }
 
   return (
@@ -145,6 +179,7 @@ export function LessonDiscussion({ lessonSlug }: LessonDiscussionProps) {
                       data-testid="textarea-new-comment"
                     />
                   </FormControl>
+                  <FormMessage className="text-right" />
                 </FormItem>
               )}
             />
@@ -199,7 +234,7 @@ export function LessonDiscussion({ lessonSlug }: LessonDiscussionProps) {
                           <Button
                             variant="ghost"
                             size="sm"
-                            onClick={() => setReplyingTo(replyingTo === comment._id ? null : comment._id)}
+                            onClick={() => handleReplyToChange(replyingTo === comment._id ? null : comment._id)}
                             className="gap-1"
                             data-testid={`button-reply-${comment._id}`}
                           >
@@ -241,6 +276,7 @@ export function LessonDiscussion({ lessonSlug }: LessonDiscussionProps) {
                                       data-testid={`textarea-reply-${comment._id}`}
                                     />
                                   </FormControl>
+                                  <FormMessage className="text-right" />
                                 </FormItem>
                               )}
                             />
@@ -249,10 +285,8 @@ export function LessonDiscussion({ lessonSlug }: LessonDiscussionProps) {
                                 type="button"
                                 variant="ghost"
                                 size="sm"
-                                onClick={() => {
-                                  setReplyingTo(null);
-                                  replyForm.reset();
-                                }}
+                                onClick={() => handleReplyToChange(null)}
+                                data-testid={`button-cancel-reply-${comment._id}`}
                               >
                                 ביטול
                               </Button>
