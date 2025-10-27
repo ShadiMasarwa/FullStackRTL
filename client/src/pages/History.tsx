@@ -100,14 +100,14 @@ export default function History() {
                         </td>
                         <td className="p-4">
                           <Link href={`/lesson/${item.lessonSlug}`}>
-                            <Button variant="link" className="h-auto p-0 text-base" data-testid={`link-lesson-${item.lessonSlug}`}>
+                            <Button variant="ghost" className="h-auto p-0 text-base hover:text-primary" data-testid={`link-lesson-${item.lessonSlug}`}>
                               {item.lessonTitleHE}
                             </Button>
                           </Link>
                         </td>
                         <td className="p-4 font-medium text-foreground text-right">
                           <Link href={`/course/${item.courseSlug}`}>
-                            <Button variant="link" className="h-auto p-0 text-base font-semibold" data-testid={`link-course-${item.courseSlug}`}>
+                            <Button variant="ghost" className="h-auto p-0 text-base font-semibold hover:text-primary" data-testid={`link-course-${item.courseSlug}`}>
                               {item.courseTitleHE}
                             </Button>
                           </Link>
@@ -129,7 +129,7 @@ export default function History() {
                         </Badge>
                         <div className="text-right">
                           <Link href={`/course/${item.courseSlug}`}>
-                            <Button variant="link" className="h-auto p-0 text-sm font-semibold">
+                            <Button variant="ghost" className="h-auto p-0 text-sm font-semibold hover:text-primary">
                               {item.courseTitleHE}
                             </Button>
                           </Link>
