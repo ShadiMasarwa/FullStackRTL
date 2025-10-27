@@ -48,11 +48,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
         displayName: validatedData.displayName,
       });
 
-      const token = generateToken(user._id.toString());
+      const token = generateToken((user._id as any).toString());
 
       return res.json({
         user: {
-          id: user._id.toString(),
+          id: (user._id as any).toString(),
           email: user.email,
           displayName: user.displayName,
         },
@@ -81,11 +81,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(401).json({ message: 'אימייל או סיסמה שגויים' });
       }
 
-      const token = generateToken(user._id.toString());
+      const token = generateToken((user._id as any).toString());
 
       return res.json({
         user: {
-          id: user._id.toString(),
+          id: (user._id as any).toString(),
           email: user.email,
           displayName: user.displayName,
         },
@@ -126,7 +126,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
             : 0;
 
           return {
-            _id: course._id.toString(),
+            _id: (course._id as any).toString(),
             slug: course.slug,
             titleHE: course.titleHE,
             descriptionHE: course.descriptionHE,
@@ -173,7 +173,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         : 0;
 
       return res.json({
-        _id: course._id.toString(),
+        _id: (course._id as any).toString(),
         slug: course.slug,
         titleHE: course.titleHE,
         descriptionHE: course.descriptionHE,
@@ -234,7 +234,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           }
 
           return {
-            _id: lesson._id.toString(),
+            _id: (lesson._id as any).toString(),
             courseSlug: lesson.courseSlug,
             slug: lesson.slug,
             titleHE: lesson.titleHE,
@@ -288,7 +288,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
 
       return res.json({
-        _id: lesson._id.toString(),
+        _id: (lesson._id as any).toString(),
         courseSlug: lesson.courseSlug,
         slug: lesson.slug,
         titleHE: lesson.titleHE,
@@ -543,7 +543,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         .sort({ createdAt: 1 });
       
       const formattedComments = comments.map(comment => ({
-        _id: comment._id.toString(),
+        _id: (comment._id as any).toString(),
         lessonSlug: comment.lessonSlug,
         userId: comment.userId.toString(),
         userDisplayName: comment.userDisplayName,
@@ -605,7 +605,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       });
       
       return res.status(201).json({
-        _id: comment._id.toString(),
+        _id: (comment._id as any).toString(),
         lessonSlug: comment.lessonSlug,
         userId: comment.userId.toString(),
         userDisplayName: comment.userDisplayName,
