@@ -225,3 +225,18 @@ export const insertCommentSchema = z.object({
 
 export type Comment = z.infer<typeof commentSchema>;
 export type InsertComment = z.infer<typeof insertCommentSchema>;
+
+// ============================================
+// Certificate Schema
+// ============================================
+export const certificateSchema = z.object({
+  _id: z.string(),
+  userId: z.string(),
+  courseSlug: z.string(),
+  courseTitleHE: z.string(),
+  userDisplayName: z.string(),
+  completedAt: z.coerce.date(),
+  certificateNumber: z.string(),
+});
+
+export type Certificate = z.infer<typeof certificateSchema>;

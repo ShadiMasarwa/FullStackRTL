@@ -42,6 +42,8 @@ Preferred communication style: Simple, everyday language.
 - `/api/courses/*` - Course management and listing
 - `/api/lessons/*` - Lesson content and quiz access
 - `/api/progress/*` - User progress tracking and history
+- `/api/comments/*` - Discussion and Q&A system
+- `/api/certificates/*` - Certificate issuance and retrieval
 
 **Authentication & Authorization**:
 - JWT (JSON Web Tokens) for stateless authentication with 7-day expiration
@@ -97,6 +99,21 @@ Preferred communication style: Simple, everyday language.
    - Score tracking (0-100)
    - Answer history with correctness flags
    - Update timestamps for activity tracking
+
+6. **Comment**: Discussion and Q&A system
+   - Lesson association via slug
+   - User association with display name
+   - Threaded replies via parentCommentId
+   - Mentor response flag for instructor answers
+   - Creation and update timestamps
+
+7. **Certificate**: Course completion recognition
+   - User and course association (unique constraint)
+   - Course title (Hebrew) for certificate display
+   - User display name for personalization
+   - Completion date tracking
+   - Unique certificate number generation
+   - Only issued when all course lessons are completed with status "done"
 
 **Indexing Strategy**: Compound indexes on `userId + courseSlug + lessonSlug` for efficient progress queries.
 
@@ -175,3 +192,35 @@ Preferred communication style: Simple, everyday language.
 - Questions array is not empty (`quiz.questions.length > 0`)
 
 This prevents undefined access errors during component initialization, data fetching, and navigation transitions.
+
+### Certificate System Implementation (October 2025)
+
+**Feature**: Complete certificate system allowing users to earn certificates upon course completion.
+
+**Implementation**:
+1. **Database Schema**: Created Certificate model with user/course association, unique constraint, and certificate number generation
+2. **API Endpoints**:
+   - GET `/api/certificates` - Retrieves all user certificates
+   - POST `/api/certificates/:courseSlug` - Issues certificate with strict validation
+3. **Validation Logic**: Certificate issuance requires completion of **all** course lessons:
+   - Fetches all lessons for the course
+   - Verifies user has "done" progress record for each lesson
+   - Uses Set to prevent duplicate progress records from bypassing requirements
+   - Returns clear error messages showing total and missing lesson counts
+4. **Frontend Integration**:
+   - Certificates page with download functionality (Canvas-based PNG generation)
+   - Course page shows "Get Certificate" button when course is completed
+   - Navbar includes link to certificates page
+   - Empty states and loading skeletons for better UX
+
+**Security Enhancement**: Initial implementation only counted completed progress records, allowing potential bypass through duplicate records. Fixed by validating presence of exactly one "done" record per lesson slug.
+
+### Discussion System Enhancements (October 2025)
+
+**Improvements**: Enhanced LessonDiscussion component with better UX and inline validation.
+
+**Changes Implemented**:
+1. **Loading Skeleton**: Replaced null return with structured skeleton showing comment form and placeholder comments
+2. **Inline Form Validation**: Added FormMessage components to display Zod validation errors directly below form fields
+3. **Reply Form Reset**: Implemented handleReplyToChange to automatically reset reply form when switching between comment threads
+4. **User Feedback**: All changes improve form interaction clarity and prevent confusion when engaging with discussions

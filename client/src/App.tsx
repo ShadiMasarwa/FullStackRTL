@@ -14,6 +14,7 @@ import Course from "@/pages/Course";
 import LessonPage from "@/pages/Lesson";
 import Quiz from "@/pages/Quiz";
 import History from "@/pages/History";
+import Certificates from "@/pages/Certificates";
 
 function ProtectedRoute({ component: Component }: { component: () => JSX.Element }) {
   const { isAuthenticated, isLoading } = useAuth();
@@ -54,6 +55,9 @@ function Router() {
       </Route>
       <Route path="/history">
         {() => <ProtectedRoute component={History} />}
+      </Route>
+      <Route path="/certificates">
+        {() => <ProtectedRoute component={Certificates} />}
       </Route>
       <Route component={NotFound} />
     </Switch>

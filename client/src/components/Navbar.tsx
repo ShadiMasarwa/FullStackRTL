@@ -1,7 +1,7 @@
 import { Link, useLocation } from 'wouter';
 import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
-import { GraduationCap, LogOut, History, LayoutDashboard } from 'lucide-react';
+import { GraduationCap, LogOut, History, LayoutDashboard, Award } from 'lucide-react';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -65,6 +65,16 @@ export function Navbar() {
                 >
                   <History className="h-4 w-4" />
                   <span className="hidden sm:inline">היסטוריה</span>
+                </Button>
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  className="gap-2" 
+                  onClick={() => setLocation('/certificates')} 
+                  data-testid="link-certificates"
+                >
+                  <Award className="h-4 w-4" />
+                  <span className="hidden sm:inline">תעודות</span>
                 </Button>
                 
                 <DropdownMenu>

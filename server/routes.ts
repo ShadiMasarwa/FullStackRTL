@@ -8,6 +8,7 @@ import Lesson from './models/Lesson';
 import Quiz from './models/Quiz';
 import Progress from './models/Progress';
 import { Comment } from './models/Comment';
+import { Certificate } from './models/Certificate';
 import { authMiddleware, generateToken, type AuthRequest } from './middleware/auth';
 import { connectDB } from './db';
 
@@ -640,6 +641,97 @@ export async function registerRoutes(app: Express): Promise<Server> {
       return res.json({ message: 'ההערה נמחקה בהצלחה' });
     } catch (error) {
       console.error('Delete comment error:', error);
+      return res.status(500).json({ message: 'שגיאת שרת' });
+    }
+  });
+
+  // ============================================
+  // Certificate Routes
+  // ============================================
+
+  app.get('/api/certificates', authMiddleware, async (req: AuthRequest, res) => {
+    try {
+      const userId = req.userId!;
+      
+      const certificates = await Certificate.find({ userId }).sort({ completedAt: -1 });
+      
+      const formattedCertificates = certificates.map(cert => ({
+        _id: (cert._id as any).toString(),
+        userId: cert.userId.toString(),
+        courseSlug: cert.courseSlug,
+        courseTitleHE: cert.courseTitleHE,
+        userDisplayName: cert.userDisplayName,
+        completedAt: cert.completedAt,
+        certificateNumber: cert.certificateNumber,
+      }));
+      
+      return res.json(formattedCertificates);
+    } catch (error) {
+      console.error('Get certificates error:', error);
+      return res.status(500).json({ message: 'שגיאת שרת' });
+    }
+  });
+
+  app.post('/api/certificates/:courseSlug', authMiddleware, async (req: AuthRequest, res) => {
+    try {
+      const { courseSlug } = req.params;
+      const userId = req.userId!;
+      
+      const course = await Course.findOne({ slug: courseSlug });
+      if (!course) {
+        return res.status(404).json({ message: 'קורס לא נמצא' });
+      }
+      
+      const existingCertificate = await Certificate.findOne({ userId, courseSlug });
+      if (existingCertificate) {
+        return res.status(400).json({ message: 'כבר קיבלת תעודה לקורס זה' });
+      }
+      
+      const lessons = await Lesson.find({ courseSlug });
+      const lessonSlugs = lessons.map(lesson => lesson.slug);
+      
+      const completedProgresses = await Progress.find({
+        userId,
+        courseSlug,
+        lessonSlug: { $in: lessonSlugs },
+        status: 'done',
+      });
+      
+      const completedLessonSlugs = new Set(completedProgresses.map(p => p.lessonSlug));
+      const missingLessons = lessonSlugs.filter(slug => !completedLessonSlugs.has(slug));
+      
+      if (missingLessons.length > 0) {
+        return res.status(400).json({ 
+          message: `עליך להשלים את כל ${lessons.length} השיעורים לפני קבלת התעודה. חסרים ${missingLessons.length} שיעורים.`,
+        });
+      }
+      
+      const user = await User.findById(userId);
+      if (!user) {
+        return res.status(404).json({ message: 'משתמש לא נמצא' });
+      }
+      
+      const certificateNumber = `FSE-${courseSlug.toUpperCase()}-${Date.now()}-${userId.toString().slice(-6)}`;
+      
+      const certificate = await Certificate.create({
+        userId,
+        courseSlug,
+        courseTitleHE: course.titleHE,
+        userDisplayName: user.displayName,
+        certificateNumber,
+      });
+      
+      return res.status(201).json({
+        _id: (certificate._id as any).toString(),
+        userId: certificate.userId.toString(),
+        courseSlug: certificate.courseSlug,
+        courseTitleHE: certificate.courseTitleHE,
+        userDisplayName: certificate.userDisplayName,
+        completedAt: certificate.completedAt,
+        certificateNumber: certificate.certificateNumber,
+      });
+    } catch (error) {
+      console.error('Create certificate error:', error);
       return res.status(500).json({ message: 'שגיאת שרת' });
     }
   });

@@ -1,15 +1,18 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useMutation } from '@tanstack/react-query';
 import { useRoute, Link } from 'wouter';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Badge } from '@/components/ui/badge';
-import { Lock, CheckCircle, Circle, ArrowRight, ArrowLeft } from 'lucide-react';
-import type { LessonWithStatus, CourseWithProgress } from '@shared/schema';
+import { Lock, CheckCircle, Circle, ArrowRight, ArrowLeft, Award } from 'lucide-react';
+import { useToast } from '@/hooks/use-toast';
+import { apiRequest, queryClient } from '@/lib/queryClient';
+import type { LessonWithStatus, CourseWithProgress, Certificate } from '@shared/schema';
 
 export default function Course() {
   const [, params] = useRoute('/course/:slug');
   const courseSlug = params?.slug;
+  const { toast } = useToast();
 
   const { data: course, isLoading: courseLoading } = useQuery<CourseWithProgress>({
     queryKey: [`/api/courses/${courseSlug}`],
@@ -21,7 +24,34 @@ export default function Course() {
     enabled: !!courseSlug,
   });
 
+  const { data: certificates } = useQuery<Certificate[]>({
+    queryKey: ['/api/certificates'],
+  });
+
   const isLoading = courseLoading || lessonsLoading;
+  
+  const hasCertificate = certificates?.some(cert => cert.courseSlug === courseSlug);
+  const isCourseCompleted = course && course.completedLessons === course.totalLessons;
+
+  const createCertificateMutation = useMutation({
+    mutationFn: async () => {
+      return await apiRequest('POST', `/api/certificates/${courseSlug}`);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['/api/certificates'] });
+      toast({
+        title: 'מזל טוב! 🎉',
+        description: 'קיבלת תעודה על סיום הקורס. אתה יכול למצוא אותה בדף התעודות.',
+      });
+    },
+    onError: (error: any) => {
+      toast({
+        title: 'שגיאה',
+        description: error.message || 'לא ניתן ליצור תעודה כרגע',
+        variant: 'destructive',
+      });
+    },
+  });
 
   if (!courseSlug) {
     return <div className="text-center py-12">קורס לא נמצא</div>;
@@ -77,12 +107,35 @@ export default function Course() {
           <div className="mb-12 text-right">
             <h1 className="text-4xl font-bold text-foreground mb-4">{course?.titleHE}</h1>
             <p className="text-xl text-muted-foreground mb-4">{course?.descriptionHE}</p>
-            <div className="flex items-center gap-4 justify-end">
+            <div className="flex items-center gap-4 justify-end flex-wrap">
               <Badge variant="secondary" className="text-sm">{course?.levelRange}</Badge>
               <span className="text-sm text-muted-foreground">
                 {course?.completedLessons} מתוך {course?.totalLessons} שיעורים הושלמו
               </span>
             </div>
+            {isCourseCompleted && !hasCertificate && (
+              <div className="mt-6">
+                <Button
+                  onClick={() => createCertificateMutation.mutate()}
+                  disabled={createCertificateMutation.isPending}
+                  className="gap-2"
+                  data-testid="button-get-certificate"
+                >
+                  <Award className="h-5 w-5" />
+                  קבל תעודת הצטיינות
+                </Button>
+              </div>
+            )}
+            {hasCertificate && (
+              <div className="mt-6">
+                <Link href="/certificates">
+                  <Button variant="outline" className="gap-2" data-testid="button-view-certificates">
+                    <Award className="h-5 w-5" />
+                    צפה בתעודות שלך
+                  </Button>
+                </Link>
+              </div>
+            )}
           </div>
         )}
 
@@ -130,12 +183,10 @@ export default function Course() {
                         <div className="flex-shrink-0">
                           {!isLocked ? (
                             <Link href={`/lesson/${lesson.slug}`}>
-                              <a>
-                                <Button className="gap-2" data-testid={`button-start-lesson-${lesson.slug}`}>
-                                  <ArrowLeft className="h-4 w-4" />
-                                  {lesson.status === 'done' ? 'חזרה לשיעור' : 'התחל שיעור'}
-                                </Button>
-                              </a>
+                              <Button className="gap-2" data-testid={`button-start-lesson-${lesson.slug}`}>
+                                <ArrowLeft className="h-4 w-4" />
+                                {lesson.status === 'done' ? 'חזרה לשיעור' : 'התחל שיעור'}
+                              </Button>
                             </Link>
                           ) : (
                             <Button disabled className="gap-2">
