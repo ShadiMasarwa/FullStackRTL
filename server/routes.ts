@@ -240,8 +240,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
             slug: lesson.slug,
             titleHE: lesson.titleHE,
             order: lesson.order,
-            contentHE: lesson.contentHE,
-            examples: lesson.examples,
+            pages: lesson.pages,
             requiresScore: lesson.requiresScore,
             status,
           };
@@ -294,8 +293,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         slug: lesson.slug,
         titleHE: lesson.titleHE,
         order: lesson.order,
-        contentHE: lesson.contentHE,
-        examples: lesson.examples,
+        pages: lesson.pages,
         requiresScore: lesson.requiresScore,
       });
     } catch (error) {
