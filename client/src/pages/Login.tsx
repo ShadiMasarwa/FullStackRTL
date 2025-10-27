@@ -31,8 +31,7 @@ export default function Login() {
         title: 'התחברת בהצלחה!',
         description: `שלום ${response.user.displayName}`,
       });
-      // Use hard redirect to ensure state is loaded from localStorage
-      window.location.href = '/dashboard';
+      setLocation('/dashboard');
     } catch (error: any) {
       toast({
         variant: 'destructive',
@@ -105,9 +104,9 @@ export default function Login() {
           <div className="mt-6 text-center text-sm">
             <span className="text-muted-foreground">אין לך חשבון? </span>
             <Link href="/register">
-              <a className="text-primary hover:underline font-medium" data-testid="link-register">
+              <span className="text-primary hover:underline font-medium cursor-pointer" data-testid="link-register">
                 הירשם עכשיו
-              </a>
+              </span>
             </Link>
           </div>
         </CardContent>

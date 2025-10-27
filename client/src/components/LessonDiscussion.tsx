@@ -107,9 +107,10 @@ export function LessonDiscussion({ lessonSlug }: LessonDiscussionProps) {
     }
   };
 
-  const topLevelComments = comments.filter(c => !c.parentCommentId);
+  const commentsArray = Array.isArray(comments) ? comments : [];
+  const topLevelComments = commentsArray.filter(c => !c.parentCommentId);
   const getReplies = (commentId: string) => 
-    comments.filter(c => c.parentCommentId === commentId);
+    commentsArray.filter(c => c.parentCommentId === commentId);
 
   if (isLoading) {
     return null;
@@ -122,7 +123,7 @@ export function LessonDiscussion({ lessonSlug }: LessonDiscussionProps) {
           <MessageCircle className="h-5 w-5" />
           <span>שאלות ותגובות</span>
           <span className="text-sm text-muted-foreground">
-            ({comments.length})
+            ({commentsArray.length})
           </span>
         </CardTitle>
       </CardHeader>

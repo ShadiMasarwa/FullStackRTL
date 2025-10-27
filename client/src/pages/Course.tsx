@@ -130,10 +130,12 @@ export default function Course() {
                         <div className="flex-shrink-0">
                           {!isLocked ? (
                             <Link href={`/lesson/${lesson.slug}`}>
-                              <Button className="gap-2" data-testid={`button-start-lesson-${lesson.slug}`}>
-                                <ArrowLeft className="h-4 w-4" />
-                                {lesson.status === 'done' ? 'חזרה לשיעור' : 'התחל שיעור'}
-                              </Button>
+                              <a>
+                                <Button className="gap-2" data-testid={`button-start-lesson-${lesson.slug}`}>
+                                  <ArrowLeft className="h-4 w-4" />
+                                  {lesson.status === 'done' ? 'חזרה לשיעור' : 'התחל שיעור'}
+                                </Button>
+                              </a>
                             </Link>
                           ) : (
                             <Button disabled className="gap-2">
