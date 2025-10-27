@@ -14,7 +14,7 @@ export default function LessonPage() {
   const [currentPageIndex, setCurrentPageIndex] = useState(0);
 
   const { data: lesson, isLoading } = useQuery<Lesson>({
-    queryKey: ['/api/lessons', lessonSlug],
+    queryKey: [`/api/lessons/${lessonSlug}`],
     enabled: !!lessonSlug,
   });
 
