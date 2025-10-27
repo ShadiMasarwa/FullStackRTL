@@ -23,12 +23,12 @@ export default function Quiz() {
   const [quizResult, setQuizResult] = useState<QuizResult | null>(null);
 
   const { data: lesson } = useQuery<Lesson>({
-    queryKey: ['/api/lessons', lessonSlug],
+    queryKey: [`/api/lessons/${lessonSlug}`],
     enabled: !!lessonSlug,
   });
 
   const { data: quiz, isLoading } = useQuery<ClientQuiz>({
-    queryKey: ['/api/lessons', lessonSlug, 'quiz'],
+    queryKey: [`/api/lessons/${lessonSlug}/quiz`],
     enabled: !!lessonSlug,
   });
 
