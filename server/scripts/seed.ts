@@ -6,6 +6,7 @@ import Course from '../models/Course';
 import Lesson from '../models/Lesson';
 import Quiz from '../models/Quiz';
 import Progress from '../models/Progress';
+import { htmlLessonsContent } from '../data/html-lessons-content';
 
 const DEMO_USER = {
   email: 'demo@fullstackedu.io',
@@ -80,191 +81,130 @@ const courses = [
 ];
 
 const lessons: any = {
-  html: [
-    {
-      order: 1,
-      titleHE: 'התקנת VS Code ותוסף Live Server',
-      contentHE: '<h2>סביבת העבודה שלנו</h2><p>Visual Studio Code הוא עורך קוד חינמי ועוצמתי. תוסף Live Server מאפשר לראות שינויים בזמן אמת.</p><p>צעדים להתקנה:</p><ol><li>הורד VS Code מהאתר הרשמי</li><li>התקן את התוכנה</li><li>פתח את VS Code ולחץ על Extensions (Ctrl+Shift+X)</li><li>חפש "Live Server" והתקן</li></ol>',
-      examples: [],
-    },
-    {
-      order: 2,
-      titleHE: 'מבנה קובץ HTML בסיסי',
-      contentHE: '<h2>מבנה דף HTML</h2><p>כל דף HTML מתחיל עם הצהרת DOCTYPE ומכיל את התגיות הבסיסיות: html, head, body.</p>',
-      examples: [
-        {
-          titleHE: 'דף HTML בסיסי',
-          code: '<!DOCTYPE html>\n<html lang="he" dir="rtl">\n<head>\n  <meta charset="UTF-8">\n  <title>הדף הראשון שלי</title>\n</head>\n<body>\n  <h1>שלום עולם!</h1>\n</body>\n</html>',
-          expectedOutput: 'דף עם כותרת "שלום עולם!" מיושרת לימין',
-        },
-      ],
-    },
-    {
-      order: 3,
-      titleHE: 'כותרות, פסקאות ורשימות',
-      contentHE: '<h2>תגיות טקסט בסיסיות</h2><p>נלמד על h1-h6 לכותרות, p לפסקאות, ul/ol לרשימות.</p>',
-      examples: [
-        {
-          titleHE: 'כותרות ורשימות',
-          code: '<h1>כותרת ראשית</h1>\n<h2>כותרת משנית</h2>\n<p>זוהי פסקה.</p>\n<ul>\n  <li>פריט 1</li>\n  <li>פריט 2</li>\n</ul>',
-          expectedOutput: 'כותרות בגדלים שונים, פסקה ורשימה עם נקודות',
-        },
-      ],
-    },
-    {
-      order: 4,
-      titleHE: 'קישורים ותמונות',
-      contentHE: '<h2>הוספת קישורים ותמונות</h2><p>תגית a ליצירת קישורים, img להצגת תמונות.</p>',
-      examples: [
-        {
-          titleHE: 'קישור ותמונה',
-          code: '<a href="https://google.com">קישור לגוגל</a>\n<img src="image.jpg" alt="תיאור התמונה">',
-          expectedOutput: 'קישור לחיץ ותמונה (אם קיימת)',
-        },
-      ],
-    },
-    {
-      order: 5,
-      titleHE: 'טבלאות',
-      contentHE: '<h2>יצירת טבלאות</h2><p>טבלאות נוצרות עם table, tr (שורות), td (תאים).</p>',
-      examples: [
-        {
-          titleHE: 'טבלה פשוטה',
-          code: '<table border="1">\n  <tr>\n    <th>שם</th>\n    <th>גיל</th>\n  </tr>\n  <tr>\n    <td>יוסי</td>\n    <td>25</td>\n  </tr>\n</table>',
-          expectedOutput: 'טבלה עם כותרות ושורה אחת של נתונים',
-        },
-      ],
-    },
-    {
-      order: 6,
-      titleHE: 'טפסים בסיסיים',
-      contentHE: '<h2>יצירת טפסים</h2><p>טפסים מאפשרים למשתמשים להזין נתונים - input, label, select.</p>',
-      examples: [
-        {
-          titleHE: 'טופס פשוט',
-          code: '<form>\n  <label>שם:</label>\n  <input type="text" name="name">\n  <input type="submit" value="שלח">\n</form>',
-          expectedOutput: 'טופס עם שדה טקסט וכפתור שליחה',
-        },
-      ],
-    },
-    {
-      order: 7,
-      titleHE: 'סמנטיקה - header, nav, main, footer',
-      contentHE: '<h2>תגיות סמנטיות</h2><p>תגיות כמו header, nav, main, footer נותנות משמעות למבנה הדף.</p>',
-      examples: [
-        {
-          titleHE: 'מבנה סמנטי',
-          code: '<header>\n  <h1>כותרת האתר</h1>\n</header>\n<nav>\n  <a href="#home">בית</a>\n</nav>\n<main>\n  <p>תוכן עיקרי</p>\n</main>\n<footer>\n  <p>זכויות יוצרים 2024</p>\n</footer>',
-          expectedOutput: 'דף עם מבנה מאורגן וברור',
-        },
-      ],
-    },
-    {
-      order: 8,
-      titleHE: 'מולטימדיה - audio, video, iframe',
-      contentHE: '<h2>הטמעת מדיה</h2><p>HTML5 מאפשר הטמעת שמע, וידאו ותכנים חיצוניים.</p>',
-      examples: [
-        {
-          titleHE: 'סרטון YouTube',
-          code: '<iframe width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ"></iframe>',
-          expectedOutput: 'נגן YouTube מוטמע בדף',
-        },
-      ],
-    },
-  ],
+  html: htmlLessonsContent,
   css: [
     {
       order: 1,
       titleHE: 'התקנת VS Code - הרחבות CSS ו-Prettier',
-      contentHE: '<h2>כלים לעבודה עם CSS</h2><p>התקן הרחבות CSS IntelliSense ו-Prettier לעזרה בכתיבה ופורמט אוטומטי.</p>',
-      examples: [],
+      pages: [{
+        titleHE: 'כלים לעבודה עם CSS',
+        contentHE: '<h2>כלים לעבודה עם CSS</h2><p>התקן הרחבות CSS IntelliSense ו-Prettier לעזרה בכתיבה ופורמט אוטומטי.</p>',
+        codeExamples: [],
+      }],
     },
     {
       order: 2,
       titleHE: 'סלקטורים ומורכבים, Box Model',
-      contentHE: '<h2>בחירת אלמנטים ומודל הקופסה</h2><p>סלקטורים: tag, .class, #id. Box Model: margin, border, padding, content.</p>',
-      examples: [
-        {
-          titleHE: 'סלקטור מחלקה',
-          code: '.my-class {\n  color: blue;\n  padding: 10px;\n  border: 1px solid black;\n}',
-          expectedOutput: 'טקסט כחול עם padding ובורדר',
-        },
-      ],
+      pages: [{
+        titleHE: 'בחירת אלמנטים ומודל הקופסה',
+        contentHE: '<h2>בחירת אלמנטים ומודל הקופסה</h2><p>סלקטורים: tag, .class, #id. Box Model: margin, border, padding, content.</p>',
+        codeExamples: [
+          {
+            titleHE: 'סלקטור מחלקה',
+            code: '.my-class {\n  color: blue;\n  padding: 10px;\n  border: 1px solid black;\n}',
+            output: 'טקסט כחול עם padding ובורדר',
+            explanationHE: 'סלקטור מחלקה בוחר כל האלמנטים עם class="my-class"',
+          },
+        ],
+      }],
     },
     {
       order: 3,
       titleHE: 'טיפוגרפיה, צבעים, משתני CSS',
-      contentHE: '<h2>עיצוב טקסט וצבעים</h2><p>font-family, font-size, color. משתני CSS: --main-color.</p>',
-      examples: [
-        {
-          titleHE: 'משתני CSS',
-          code: ':root {\n  --primary: #0066cc;\n}\n\nh1 {\n  color: var(--primary);\n  font-size: 2rem;\n}',
-          expectedOutput: 'כותרת בצבע כחול בגודל 2rem',
-        },
-      ],
+      pages: [{
+        titleHE: 'עיצוב טקסט וצבעים',
+        contentHE: '<h2>עיצוב טקסט וצבעים</h2><p>font-family, font-size, color. משתני CSS: --main-color.</p>',
+        codeExamples: [
+          {
+            titleHE: 'משתני CSS',
+            code: ':root {\n  --primary: #0066cc;\n}\n\nh1 {\n  color: var(--primary);\n  font-size: 2rem;\n}',
+            output: 'כותרת בצבע כחול בגודל 2rem',
+            explanationHE: 'משתני CSS מאפשרים שימוש חוזר בערכים',
+          },
+        ],
+      }],
     },
     {
       order: 4,
       titleHE: 'Flexbox',
-      contentHE: '<h2>פריסה גמישה</h2><p>Flexbox מאפשר סידור אלמנטים בשורה או עמודה בקלות.</p>',
-      examples: [
-        {
-          titleHE: 'מיכל Flex',
-          code: '.container {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n}',
-          expectedOutput: 'אלמנטים מסודרים אופקית עם רווח ביניהם',
-        },
-      ],
+      pages: [{
+        titleHE: 'פריסה גמישה',
+        contentHE: '<h2>פריסה גמישה</h2><p>Flexbox מאפשר סידור אלמנטים בשורה או עמודה בקלות.</p>',
+        codeExamples: [
+          {
+            titleHE: 'מיכל Flex',
+            code: '.container {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n}',
+            output: 'אלמנטים מסודרים אופקית עם רווח ביניהם',
+            explanationHE: 'Flexbox מאפשר שליטה מלאה על פריסת אלמנטים',
+          },
+        ],
+      }],
     },
     {
       order: 5,
       titleHE: 'Grid',
-      contentHE: '<h2>רשת דו-ממדית</h2><p>CSS Grid מאפשר פריסות מורכבות עם שורות ועמודות.</p>',
-      examples: [
-        {
-          titleHE: 'Grid פשוט',
-          code: '.grid {\n  display: grid;\n  grid-template-columns: repeat(3, 1fr);\n  gap: 20px;\n}',
-          expectedOutput: 'רשת עם 3 עמודות שוות',
-        },
-      ],
+      pages: [{
+        titleHE: 'רשת דו-ממדית',
+        contentHE: '<h2>רשת דו-ממדית</h2><p>CSS Grid מאפשר פריסות מורכבות עם שורות ועמודות.</p>',
+        codeExamples: [
+          {
+            titleHE: 'Grid פשוט',
+            code: '.grid {\n  display: grid;\n  grid-template-columns: repeat(3, 1fr);\n  gap: 20px;\n}',
+            output: 'רשת עם 3 עמודות שוות',
+            explanationHE: 'Grid מתאים לפריסות דו-ממדיות מורכבות',
+          },
+        ],
+      }],
     },
     {
       order: 6,
       titleHE: 'מיקום - Position, Z-index',
-      contentHE: '<h2>שליטה במיקום אלמנטים</h2><p>position: static, relative, absolute, fixed, sticky.</p>',
-      examples: [
-        {
-          titleHE: 'מיקום מוחלט',
-          code: '.absolute {\n  position: absolute;\n  top: 10px;\n  left: 10px;\n  z-index: 10;\n}',
-          expectedOutput: 'אלמנט ממוקם 10px מלמעלה ומשמאל',
-        },
-      ],
+      pages: [{
+        titleHE: 'שליטה במיקום אלמנטים',
+        contentHE: '<h2>שליטה במיקום אלמנטים</h2><p>position: static, relative, absolute, fixed, sticky.</p>',
+        codeExamples: [
+          {
+            titleHE: 'מיקום מוחלט',
+            code: '.absolute {\n  position: absolute;\n  top: 10px;\n  left: 10px;\n  z-index: 10;\n}',
+            output: 'אלמנט ממוקם 10px מלמעלה ומשמאל',
+            explanationHE: 'מיקום מוחלט מוציא את האלמנט מזרימת המסמך',
+          },
+        ],
+      }],
     },
     {
       order: 7,
       titleHE: 'רספונסיביות ו-Media Queries',
-      contentHE: '<h2>התאמה למסכים שונים</h2><p>Media Queries מאפשרים עיצוב שונה לפי גודל מסך.</p>',
-      examples: [
-        {
-          titleHE: 'Media Query',
-          code: '@media (max-width: 768px) {\n  .container {\n    flex-direction: column;\n  }\n}',
-          expectedOutput: 'במובייל - עמודות מסודרות אנכית',
-        },
-      ],
+      pages: [{
+        titleHE: 'התאמה למסכים שונים',
+        contentHE: '<h2>התאמה למסכים שונים</h2><p>Media Queries מאפשרים עיצוב שונה לפי גודל מסך.</p>',
+        codeExamples: [
+          {
+            titleHE: 'Media Query',
+            code: '@media (max-width: 768px) {\n  .container {\n    flex-direction: column;\n  }\n}',
+            output: 'במובייל - עמודות מסודרות אנכית',
+            explanationHE: 'Media Queries מאפשרים עיצוב רספונסיבי',
+          },
+        ],
+      }],
     },
     {
       order: 8,
       titleHE: 'פרויקט מיני - דף רספונסיבי מלא',
-      contentHE: '<h2>בניית דף מלא</h2><p>שלב את כל מה שלמדת: Flexbox, Grid, רספונסיביות.</p>',
-      examples: [
-        {
-          titleHE: 'כרטיס מוצר',
-          code: '.card {\n  display: flex;\n  flex-direction: column;\n  border-radius: 8px;\n  box-shadow: 0 2px 8px rgba(0,0,0,0.1);\n  padding: 20px;\n}',
-          expectedOutput: 'כרטיס מעוצב עם צללית ופינות מעוגלות',
-        },
-      ],
+      pages: [{
+        titleHE: 'בניית דף מלא',
+        contentHE: '<h2>בניית דף מלא</h2><p>שלב את כל מה שלמדת: Flexbox, Grid, רספונסיביות.</p>',
+        codeExamples: [
+          {
+            titleHE: 'כרטיס מוצר',
+            code: '.card {\n  display: flex;\n  flex-direction: column;\n  border-radius: 8px;\n  box-shadow: 0 2px 8px rgba(0,0,0,0.1);\n  padding: 20px;\n}',
+            output: 'כרטיס מעוצב עם צללית ופינות מעוגלות',
+            explanationHE: 'שילוב של Flexbox, Box Model ועיצוב מתקדם',
+          },
+        ],
+      }],
     },
   ],
-  // ... (קיצור - ניצור את שאר הקורסים בצורה דומה)
 };
 
 // Generate quiz questions for each lesson
@@ -321,12 +261,16 @@ function generateQuizQuestions(courseSlug: string, lessonOrder: number) {
   lessons[courseSlug] = Array.from({ length: 8 }, (_, i) => ({
     order: i + 1,
     titleHE: `שיעור ${i + 1} - ${courseSlug.toUpperCase()}`,
-    contentHE: `<h2>תוכן שיעור ${i + 1}</h2><p>זהו תוכן הדגמתי לשיעור ${i + 1} בקורס ${courseSlug}.</p>`,
-    examples: i > 0 ? [{
-      titleHE: 'דוגמה',
-      code: `// Example code for ${courseSlug} lesson ${i + 1}\nconsole.log("Hello from ${courseSlug}");`,
-      expectedOutput: `Hello from ${courseSlug}`,
-    }] : [],
+    pages: [{
+      titleHE: `תוכן שיעור ${i + 1}`,
+      contentHE: `<h2>תוכן שיעור ${i + 1}</h2><p>זהו תוכן הדגמתי לשיעור ${i + 1} בקורס ${courseSlug}.</p>`,
+      codeExamples: i > 0 ? [{
+        titleHE: 'דוגמה',
+        code: `// Example code for ${courseSlug} lesson ${i + 1}\nconsole.log("Hello from ${courseSlug}");`,
+        output: `Hello from ${courseSlug}`,
+        explanationHE: 'דוגמה להמחשת הקוד',
+      }] : [],
+    }],
   }));
 });
 

@@ -2,7 +2,7 @@
 
 ## Overview
 
-FullStackEDU is a comprehensive educational web application designed for teaching Full-Stack development in Hebrew with RTL (right-to-left) support. The platform provides a structured learning path through 7 courses covering HTML, CSS, Bootstrap, JavaScript, React, Node.js, and MongoDB. The application features user authentication, progress tracking, interactive quizzes, and a sequential lesson unlock system where students must pass quizzes before advancing to the next lesson.
+FullStackEDU is a comprehensive educational web application designed for teaching Full-Stack development in Hebrew with RTL (right-to-left) support. The platform provides a structured learning path through 7 courses covering HTML, CSS, Bootstrap, JavaScript, React, Node.js, and MongoDB. Each lesson is divided into multiple pages with rich content, code examples, and explanations. The application features user authentication, progress tracking, interactive quizzes, and a sequential lesson unlock system where students must pass quizzes before advancing to the next lesson.
 
 ## User Preferences
 
@@ -83,8 +83,9 @@ Preferred communication style: Simple, everyday language.
 3. **Lesson**: Individual learning units
    - Course association via slug
    - Ordered presentation within course
-   - Content stored as HTML/Markdown in Hebrew
-   - Code examples with expected outputs
+   - **Pages structure**: Each lesson contains multiple pages (2-3 pages per lesson)
+     - Each page includes: titleHE (page title), contentHE (rich HTML content in Hebrew), codeExamples (optional array)
+     - Code examples include: titleHE, code, output, explanationHE
    - Required score threshold (100 for completion)
 
 4. **Quiz**: Assessment mechanism
@@ -224,3 +225,40 @@ This prevents undefined access errors during component initialization, data fetc
 2. **Inline Form Validation**: Added FormMessage components to display Zod validation errors directly below form fields
 3. **Reply Form Reset**: Implemented handleReplyToChange to automatically reset reply form when switching between comment threads
 4. **User Feedback**: All changes improve form interaction clarity and prevent confusion when engaging with discussions
+
+### Multi-Page Lesson System (October 2025)
+
+**Feature**: Complete redesign of lesson structure to support multiple pages per lesson with rich content and navigation.
+
+**Implementation**:
+1. **Schema Changes**:
+   - Updated Lesson schema from single `contentHE` + `examples[]` to `pages[]` array
+   - Each page includes: `titleHE`, `contentHE`, and optional `codeExamples[]`
+   - Code examples enhanced with: `titleHE`, `code`, `output`, and `explanationHE`
+   - Updated both `shared/schema.ts` (Zod) and `server/models/Lesson.ts` (Mongoose)
+
+2. **Frontend UI**:
+   - Rebuilt Lesson component with pagination navigation
+   - Top and bottom navigation bars with Previous/Next buttons
+   - Dot indicator showing current page and total pages
+   - Auto-reset to first page when switching lessons (via useEffect)
+   - Discussion section only shows on the last page
+   - Quiz button only visible on the last page
+
+3. **Content Creation**:
+   - Created professional Hebrew content for all 8 HTML lessons
+   - Each lesson split into 2-3 focused pages
+   - Comprehensive coverage: VS Code setup, HTML structure, headings/paragraphs, links/images, tables, forms, semantic HTML, multimedia
+   - Rich code examples with explanations and expected outputs
+   - Content organized in `server/data/html-lessons-content.ts`
+
+4. **Seed Script Integration**:
+   - Updated seed script to import and use new lesson content structure
+   - HTML course now uses professional multi-page content
+   - Other courses maintain placeholder content (to be updated later)
+
+**Benefits**:
+- Better learning experience with focused, digestible content
+- Clear progression through complex topics
+- More engaging with interactive navigation
+- Professional educational content with detailed explanations

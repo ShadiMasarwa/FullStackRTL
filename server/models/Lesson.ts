@@ -1,9 +1,16 @@
 import mongoose, { Schema, Document } from 'mongoose';
 
-export interface IExample {
+export interface ICodeExample {
   titleHE: string;
   code: string;
-  expectedOutput: string;
+  output: string;
+  explanationHE: string;
+}
+
+export interface ILessonPage {
+  titleHE: string;
+  contentHE: string;
+  codeExamples?: ICodeExample[];
 }
 
 export interface ILesson extends Document {
@@ -11,15 +18,24 @@ export interface ILesson extends Document {
   slug: string;
   titleHE: string;
   order: number;
-  contentHE: string;
-  examples: IExample[];
+  pages: ILessonPage[];
   requiresScore: number;
 }
 
-const ExampleSchema = new Schema<IExample>({
+const CodeExampleSchema = new Schema<ICodeExample>({
   titleHE: String,
   code: String,
-  expectedOutput: String,
+  output: String,
+  explanationHE: String,
+}, { _id: false });
+
+const LessonPageSchema = new Schema<ILessonPage>({
+  titleHE: String,
+  contentHE: String,
+  codeExamples: {
+    type: [CodeExampleSchema],
+    default: [],
+  },
 }, { _id: false });
 
 const LessonSchema = new Schema<ILesson>({
@@ -41,13 +57,9 @@ const LessonSchema = new Schema<ILesson>({
     type: Number,
     required: true,
   },
-  contentHE: {
-    type: String,
+  pages: {
+    type: [LessonPageSchema],
     required: true,
-  },
-  examples: {
-    type: [ExampleSchema],
-    default: [],
   },
   requiresScore: {
     type: Number,

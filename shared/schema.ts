@@ -45,10 +45,17 @@ export type Course = z.infer<typeof courseSchema>;
 // ============================================
 // Lesson Schema
 // ============================================
-export const exampleSchema = z.object({
+export const codeExampleSchema = z.object({
   titleHE: z.string(),
   code: z.string(),
-  expectedOutput: z.string(),
+  output: z.string(),
+  explanationHE: z.string(),
+});
+
+export const lessonPageSchema = z.object({
+  titleHE: z.string(),
+  contentHE: z.string(),
+  codeExamples: z.array(codeExampleSchema).optional(),
 });
 
 export const lessonSchema = z.object({
@@ -57,13 +64,13 @@ export const lessonSchema = z.object({
   slug: z.string(),
   titleHE: z.string(),
   order: z.number(),
-  contentHE: z.string(),
-  examples: z.array(exampleSchema),
+  pages: z.array(lessonPageSchema),
   requiresScore: z.number(), // 100 for completion
 });
 
 export type Lesson = z.infer<typeof lessonSchema>;
-export type Example = z.infer<typeof exampleSchema>;
+export type LessonPage = z.infer<typeof lessonPageSchema>;
+export type CodeExample = z.infer<typeof codeExampleSchema>;
 
 // ============================================
 // Quiz Schema
