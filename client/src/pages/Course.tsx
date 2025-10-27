@@ -12,12 +12,12 @@ export default function Course() {
   const courseSlug = params?.slug;
 
   const { data: course, isLoading: courseLoading } = useQuery<CourseWithProgress>({
-    queryKey: ['/api/courses', courseSlug],
+    queryKey: [`/api/courses/${courseSlug}`],
     enabled: !!courseSlug,
   });
 
   const { data: lessons, isLoading: lessonsLoading } = useQuery<LessonWithStatus[]>({
-    queryKey: ['/api/courses', courseSlug, 'lessons'],
+    queryKey: [`/api/courses/${courseSlug}/lessons`],
     enabled: !!courseSlug,
   });
 
