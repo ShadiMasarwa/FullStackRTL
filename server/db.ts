@@ -9,6 +9,12 @@ let isSeeded = false;
 
 export async function connectDB() {
   try {
+    // Disconnect any existing connections first
+    if (mongoose.connection.readyState !== 0) {
+      console.log('🔄 Disconnecting existing MongoDB connection...');
+      await mongoose.disconnect();
+    }
+
     const isProduction = process.env.NODE_ENV === 'production';
     let uri: string;
     let shouldAutoSeed = false;

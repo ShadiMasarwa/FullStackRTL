@@ -10,10 +10,6 @@ import Progress from './models/Progress';
 import { Comment } from './models/Comment';
 import { Certificate } from './models/Certificate';
 import { authMiddleware, generateToken, type AuthRequest } from './middleware/auth';
-import { connectDB } from './db';
-
-// Connect to MongoDB
-connectDB().catch(console.error);
 
 // Validation schemas
 const registerSchema = z.object({
