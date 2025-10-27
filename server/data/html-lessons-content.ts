@@ -61,7 +61,7 @@ export const htmlLessonsContent = [
   <h1>שלום עולם!</h1>
 </body>
 </html>`,
-            output: 'כדי להריץ: לחצו ימין על הקובץ ובחרו "Open with Live Server" או על הכפתור "Go Live" בתחתית המסך',
+            output: '<h1>שלום עולם!</h1>',
             explanationHE: '<p>כשתשמרו שינויים בקובץ (<kbd>Ctrl+S</kbd>), הדפדפן יתעדכן אוטומטית! זה חוסך המון זמן בזמן פיתוח.</p>',
           },
         ],
@@ -116,7 +116,7 @@ export const htmlLessonsContent = [
   <p>זהו הדף הראשון שלי ב-HTML.</p>
 </body>
 </html>`,
-            output: 'הדפדפן יציג כותרת גדולה "שלום עולם!" ומתחתיה פסקת טקסט, הכל מיושר לימין',
+            output: '<h1>שלום עולם!</h1><p>זהו הדף הראשון שלי ב-HTML.</p>',
             explanationHE: `
               <p><strong>הסבר על כל שורה:</strong></p>
               <ul>
@@ -167,7 +167,7 @@ export const htmlLessonsContent = [
   <p>באתר תוכלו למצוא פרויקטים ומאמרים.</p>
 </body>
 </html>`,
-            output: 'הדפדפן יציג את התוכן שב-body, והכותרת "שמך - דף הבית" תופיע בטאב',
+            output: '<h1>ברוכים הבאים לאתר שלי</h1><p>שמי <strong>שמך</strong> ואני מפתח ווב.</p><p>באתר תוכלו למצוא פרויקטים ומאמרים.</p>',
             explanationHE: '<p>שימו לב: כל מה שכתבנו ב-&lt;head&gt; לא יופיע בעמוד עצמו, אבל הוא חשוב מאוד למנועי חיפוש, לנגישות ולאופן שבו האתר מתנהג.</p>',
           },
         ],
@@ -209,7 +209,7 @@ export const htmlLessonsContent = [
 <h2>פרק 2: התחלה מהירה</h2>
 <h3>הכנת סביבת העבודה</h3>
 <p>נצטרך VS Code ו-Live Server.</p>`,
-            output: 'מבנה היררכי ברור: כותרת ראשית, פרקים עם תתי-חלקים',
+            output: '<h1>המדריך המלא ל-HTML</h1><h2>פרק 1: מבוא</h2><h3>מהו HTML?</h3><p>HTML היא שפת הסימון הסטנדרטית ליצירת דפי אינטרנט.</p><h3>למה ללמוד HTML?</h3><p>HTML הוא הבסיס של כל דף אינטרנט.</p><h2>פרק 2: התחלה מהירה</h2><h3>הכנת סביבת העבודה</h3><p>נצטרך VS Code ו-Live Server.</p>',
             explanationHE: '<p>שימו לב איך כל h2 היא פרק חדש, וכל h3 היא תת-נושא בתוך הפרק. זה עוזר לגולשים ולמנועי חיפוש להבין את המבנה.</p>',
           },
         ],
@@ -236,7 +236,7 @@ export const htmlLessonsContent = [
 <p>אפשר גם       לשים       הרבה       רווחים בקוד, אבל הדפדפן יציג רק רווח אחד.</p>
 
 <p>אם רוצים שורה חדשה בתוך פסקה,<br>משתמשים בתגית br.</p>`,
-            output: 'ארבע פסקאות נפרדות עם רווחים ביניהן, והפסקה האחרונה עם שבירת שורה באמצע',
+            output: '<p>זוהי הפסקה הראשונה. הדפדפן ישאיר רווח אחריה אוטומטית.</p><p>זוהי פסקה שנייה. שימו לב שהשורות הריקות בקוד לא משנות את התצוגה.</p><p>אפשר גם לשים הרבה רווחים בקוד, אבל הדפדפן יציג רק רווח אחד.</p><p>אם רוצים שורה חדשה בתוך פסקה,<br>משתמשים בתגית br.</p>',
             explanationHE: '<p><strong>טעות נפוצה:</strong> אנשים מנסים ליצור רווחים עם הרבה תגיות &lt;br&gt;. במקום זה, השתמשו ב-CSS בשביל margins ו-padding!</p>',
           },
         ],
@@ -266,7 +266,7 @@ export const htmlLessonsContent = [
   <li>3 ביצים</li>
   <li>חצי כוס חמאה</li>
 </ul>`,
-            output: 'רשימה עם נקודות שחורות לפני כל פריט',
+            output: '<h2>החומרים הדרושים:</h2><ul><li>2 כוסות קמח</li><li>כוס סוכר</li><li>3 ביצים</li><li>חצי כוס חמאה</li></ul>',
             explanationHE: '<p>סדר הרכיבים לא ממש חשוב, אז משתמשים ב-ul.</p>',
           },
           {
@@ -278,7 +278,7 @@ export const htmlLessonsContent = [
   <li>מוסיפים את הביצים והחמאה</li>
   <li>אופים למשך 25 דקות</li>
 </ol>`,
-            output: 'רשימה עם מספרים: 1, 2, 3, 4',
+            output: '<h2>שלבי ההכנה:</h2><ol><li>מחממים תנור ל-180 מעלות</li><li>מערבבים את החומרים היבשים בקערה</li><li>מוסיפים את הביצים והחמאה</li><li>אופים למשך 25 דקות</li></ol>',
             explanationHE: '<p>כאן הסדר חשוב מאוד! אי אפשר לעשות שלב 4 לפני שלב 1, לכן נשתמש ב-ol.</p>',
           },
           {
@@ -299,7 +299,7 @@ export const htmlLessonsContent = [
     </ul>
   </li>
 </ul>`,
-            output: 'רשימה עם תתי-רשימות - Frontend ו-Backend כפריטים ראשיים, וכל אחד עם תתי-פריטים משלו',
+            output: '<h2>קורסים:</h2><ul><li>Frontend<ul><li>HTML</li><li>CSS</li><li>JavaScript</li></ul></li><li>Backend<ul><li>Node.js</li><li>MongoDB</li></ul></li></ul>',
             explanationHE: '<p>אפשר לקנן רשימות אחת בתוך השנייה! שימו לב שה-ul הפנימית נמצאת <strong>בתוך</strong> ה-&lt;li&gt; החיצונית.</p>',
           },
         ],
@@ -331,7 +331,7 @@ export const htmlLessonsContent = [
             code: `<p>חפשו ב-<a href="https://www.google.com">גוגל</a> מידע נוסף.</p>
 
 <a href="https://www.youtube.com">לחצו כאן לצפייה ביוטיוב</a>`,
-            output: 'קישורים כחולים עם קו תחתון (סגנון ברירת מחדל) שפותחים את האתרים בלחיצה',
+            output: '<p>חפשו ב-<a href="https://www.google.com">גוגל</a> מידע נוסף.</p><a href="https://www.youtube.com">לחצו כאן לצפייה ביוטיוב</a>',
             explanationHE: '<p><strong>חשוב:</strong> קישורים חיצוניים חייבים להתחיל ב-<code>https://</code> או <code>http://</code>, אחרת הדפדפן יחשוב שזה קובץ מקומי!</p>',
           },
           {
@@ -342,7 +342,7 @@ export const htmlLessonsContent = [
 
 <!-- פתיחה בטאב חדש -->
 <a href="https://example.com" target="_blank" rel="noopener">פתח בטאב חדש</a>`,
-            output: 'הקישור הראשון והשני יפתחו באותו טאב, השלישי בטאב חדש',
+            output: '<a href="about.html">אודות</a> <a href="contact.html">צור קשר</a> <a href="https://example.com" target="_blank" rel="noopener">פתח בטאב חדש</a>',
             explanationHE: `
               <p><strong>הסבר על התכונות:</strong></p>
               <ul>
@@ -361,7 +361,7 @@ export const htmlLessonsContent = [
 
 <!-- מייל עם נושא -->
 <a href="mailto:support@example.com?subject=פנייה מהאתר">תמיכה טכנית</a>`,
-            output: 'לחיצה על הקישורים תפתח את אפליקציית המייל/חייגן',
+            output: '<a href="mailto:info@example.com">שלחו לנו מייל</a> <a href="tel:+972501234567">התקשרו: 050-123-4567</a> <a href="mailto:support@example.com?subject=פנייה מהאתר">תמיכה טכנית</a>',
             explanationHE: '<p>שימושי מאוד באתרי עסקים! במכשירים ניידים, tel: יפתח אוטומטית את החייגן.</p>',
           },
         ],
@@ -388,7 +388,7 @@ export const htmlLessonsContent = [
             code: `<img src="cat.jpg" alt="חתול חמוד">
 
 <img src="images/logo.png" alt="לוגו החברה" width="200" height="100">`,
-            output: 'התמונות יוצגו בגודל המקורי או בגודל שהוגדר',
+            output: '<img src="cat.jpg" alt="חתול חמוד"><img src="images/logo.png" alt="לוגו החברה" width="200" height="100">',
             explanationHE: `
               <p><strong>למה alt חשוב?</strong></p>
               <ul>
@@ -411,7 +411,7 @@ export const htmlLessonsContent = [
 
 <!-- תמונה מהאינטרנט -->
 <img src="https://example.com/photo.jpg" alt="תמונה חיצונית">`,
-            output: 'כל תמונה תוצג בהתאם למיקום שלה',
+            output: '<img src="photo.jpg" alt="תמונה"> <img src="images/photo.jpg" alt="תמונה"> <img src="../photo.jpg" alt="תמונה"> <img src="https://example.com/photo.jpg" alt="תמונה חיצונית">',
             explanationHE: '<p><strong>טיפ:</strong> עדיף לארגן תמונות בתיקייה נפרדת (למשל "images") כדי לשמור על סדר בפרויקט.</p>',
           },
           {
@@ -425,7 +425,7 @@ export const htmlLessonsContent = [
 <a href="photo-large.jpg" target="_blank">
   <img src="photo-small.jpg" alt="תמונת נוף - לחץ להגדלה" width="200">
 </a>`,
-            output: 'לחיצה על התמונה תפתח את הקישור/תמונה מוגדלת',
+            output: '<a href="https://example.com"><img src="banner.jpg" alt="לחצו לצפייה במבצעים"></a> <a href="photo-large.jpg" target="_blank"><img src="photo-small.jpg" alt="תמונת נוף - לחץ להגדלה" width="200"></a>',
             explanationHE: '<p>פשוט עוטפים את תגית ה-img בתוך תגית a. שימושי מאוד לגלריות תמונות!</p>',
           },
         ],
@@ -458,7 +458,7 @@ export const htmlLessonsContent = [
 <img src="gallery1.jpg" alt="תמונה 1" loading="lazy">
 <img src="gallery2.jpg" alt="תמונה 2" loading="lazy">
 <img src="gallery3.jpg" alt="תמונה 3" loading="lazy">`,
-            output: 'התמונות עם loading="lazy" ייטענו רק כשהמשתמש גולל אליהן',
+            output: '<img src="hero-image.jpg" alt="תמונת נושא ראשית"> <img src="gallery1.jpg" alt="תמונה 1" loading="lazy"> <img src="gallery2.jpg" alt="תמונה 2" loading="lazy"> <img src="gallery3.jpg" alt="תמונה 3" loading="lazy">',
             explanationHE: '<p>זה משפר משמעותית את זמן הטעינה של העמוד! הדפדפן לא יטען תמונות שהמשתמש עדיין לא רואה.</p>',
           },
         ],
@@ -503,7 +503,7 @@ export const htmlLessonsContent = [
     <td>ירושלים</td>
   </tr>
 </table>`,
-            output: 'טבלה עם 3 עמודות ו-2 שורות נתונים, עם כותרות מודגשות',
+            output: '<table border="1"><tr><th>שם</th><th>גיל</th><th>עיר</th></tr><tr><td>יוסי</td><td>25</td><td>תל אביב</td></tr><tr><td>מיכל</td><td>30</td><td>ירושלים</td></tr></table>',
             explanationHE: '<p><strong>הערה:</strong> התכונה <code>border="1"</code> מציגה גבולות לטבלה. בעולם המודרני משתמשים ב-CSS לעיצוב הטבלה.</p>',
           },
         ],
@@ -554,7 +554,7 @@ export const htmlLessonsContent = [
     </tr>
   </tfoot>
 </table>`,
-            output: 'טבלה עם כותרות בראש, נתונים באמצע, וסיכום בתחתית',
+            output: '<table border="1"><thead><tr><th>מוצר</th><th>כמות</th><th>מחיר</th></tr></thead><tbody><tr><td>עכבר</td><td>5</td><td>50 ₪</td></tr><tr><td>מקלדת</td><td>3</td><td>150 ₪</td></tr></tbody><tfoot><tr><td colspan="2">סה"כ</td><td>700 ₪</td></tr></tfoot></table>',
             explanationHE: '<p><code>colspan="2"</code> גורם לתא לתפוס 2 עמודות. זה שימושי לסיכומים וכותרות משנה.</p>',
           },
         ],
@@ -590,7 +590,7 @@ export const htmlLessonsContent = [
     <td colspan="2">פגישת צוות בערב</td>
   </tr>
 </table>`,
-            output: 'טבלה עם תאים ממוזגים - כותרת רחבה, ותא גבוה',
+            output: '<table border="1"><tr><th>יום</th><th colspan="2">פעילויות</th></tr><tr><td>ראשון</td><td>בוקר: HTML</td><td>ערב: CSS</td></tr><tr><td rowspan="2">שני</td><td>בוקר: JavaScript</td><td>ערב: React</td></tr><tr><td colspan="2">פגישת צוות בערב</td></tr></table>',
             explanationHE: '<p>שימו לב: כשמשתמשים ב-rowspan או colspan, צריך להפחית את מספר התאים בשורות/עמודות המושפעות!</p>',
           },
         ],
@@ -651,7 +651,7 @@ export const htmlLessonsContent = [
   
   <input type="submit" value="התחבר">
 </form>`,
-            output: 'טופס עם שדה שם משתמש, שדה סיסמה וכפתור',
+            output: '<form><label for="username">שם משתמש:</label> <input type="text" id="username" name="username" required><br><br><label for="password">סיסמה:</label> <input type="password" id="password" name="password" required><br><br><input type="submit" value="התחבר"></form>',
             explanationHE: `
               <p><strong>הסבר התכונות:</strong></p>
               <ul>
@@ -704,7 +704,7 @@ export const htmlLessonsContent = [
   
   <button type="submit">שלח הודעה</button>
 </form>`,
-            output: 'טופס מלא עם שדות שונים ותפריט נפתח',
+            output: '<form><label for="name">שם מלא:</label> <input type="text" id="name" name="name" required><br><br><label for="email">אימייל:</label> <input type="email" id="email" name="email" required><br><br><label for="subject">נושא:</label> <select id="subject" name="subject"><option value="">בחר נושא</option><option value="support">תמיכה טכנית</option><option value="sales">מכירות</option><option value="other">אחר</option></select><br><br><label for="message">הודעה:</label><br><textarea id="message" name="message" rows="5" cols="40"></textarea><br><br><button type="submit">שלח הודעה</button></form>',
             explanationHE: '<p><code>&lt;textarea&gt;</code> מאפשר טקסט ארוך. <code>rows</code> ו-<code>cols</code> קובעים את גודל התיבה.</p>',
           },
           {
@@ -732,7 +732,7 @@ export const htmlLessonsContent = [
   <input type="radio" id="advanced" name="level" value="advanced">
   <label for="advanced">מתקדם</label><br>
 </form>`,
-            output: 'תיבות סימון (מרובות) ולחצני רדיו (בחירה יחידה)',
+            output: '<form><p>בחר תחומי עניין (אפשר יותר מאחד):</p><input type="checkbox" id="html" name="interests" value="html"> <label for="html">HTML</label><br><input type="checkbox" id="css" name="interests" value="css"> <label for="css">CSS</label><br><input type="checkbox" id="js" name="interests" value="js"> <label for="js">JavaScript</label><br><br><p>רמת ניסיון (בחר אחד):</p><input type="radio" id="beginner" name="level" value="beginner"> <label for="beginner">מתחיל</label><br><input type="radio" id="intermediate" name="level" value="intermediate"> <label for="intermediate">בינוני</label><br><input type="radio" id="advanced" name="level" value="advanced"> <label for="advanced">מתקדם</label><br></form>',
             explanationHE: `
               <p><strong>ההבדל:</strong></p>
               <ul>
@@ -790,7 +790,7 @@ export const htmlLessonsContent = [
 <div id="footer">
   זכויות יוצרים 2024
 </div>`,
-            output: 'עובד, אבל אין משמעות סמנטית',
+            output: '<div id="header"><div id="logo">לוגו</div><div id="menu"><div>בית</div><div>אודות</div><div>צור קשר</div></div></div><div id="content"><div class="post"><div class="title">כותרת</div><div class="text">תוכן...</div></div></div><div id="footer">זכויות יוצרים 2024</div>',
             explanationHE: '<p>כל div נראה אותו דבר - לא ברור מה התפקיד של כל חלק.</p>',
           },
           {
@@ -814,7 +814,7 @@ export const htmlLessonsContent = [
 <footer>
   <p>זכויות יוצרים 2024</p>
 </footer>`,
-            output: 'אותה תוצאה ויזואלית, אבל עם משמעות ברורה',
+            output: '<header><h1>לוגו</h1><nav><a href="/">בית</a> <a href="/about">אודות</a> <a href="/contact">צור קשר</a></nav></header><main><article><h2>כותרת</h2><p>תוכן...</p></article></main><footer><p>זכויות יוצרים 2024</p></footer>',
             explanationHE: '<p>עכשיו ברור מה כל חלק עושה - header, nav, main, article, footer.</p>',
           },
         ],
@@ -882,7 +882,7 @@ export const htmlLessonsContent = [
   
 </body>
 </html>`,
-            output: 'עמוד מלא עם מבנה סמנטי ברור',
+            output: '<header><h1>הבלוג של יוסי</h1><nav><a href="/">בית</a> <a href="/about">אודות</a> <a href="/blog">מאמרים</a> <a href="/contact">צור קשר</a></nav></header><main><article><header><h2>כותרת המאמר</h2><p>פורסם ב-1 בינואר 2024</p></header><p>תוכן המאמר...</p><footer><p>תגיות: HTML, CSS</p></footer></article><aside><h3>מאמרים פופולריים</h3><ul><li><a href="/post1">מאמר 1</a></li><li><a href="/post2">מאמר 2</a></li></ul></aside></main><footer><p>זכויות יוצרים © 2024 יוסי</p><p>עקבו אחרי ברשתות החברתיות</p></footer>',
             explanationHE: `
               <p><strong>שימו לב:</strong></p>
               <ul>
@@ -930,7 +930,7 @@ export const htmlLessonsContent = [
     <button>כפתור 2</button>
   </div>
 </main>`,
-            output: 'שימוש נכון בתגיות הסמנטיות',
+            output: '<main><article><h2>מדריך HTML למתחילים</h2><p>מאמר מלא שניתן להפיץ בנפרד...</p></article><section><h2>מה נלמד בקורס?</h2><ul><li>HTML</li><li>CSS</li><li>JavaScript</li></ul></section><div class="button-group"><button>כפתור 1</button><button>כפתור 2</button></div></main>',
             explanationHE: '<p><strong>כלל אצבע:</strong> אם אפשר לשתף את התוכן בנפרד - זה article. אם זה חלק מהעמוד - section. אם זה רק לעיצוב - div.</p>',
           },
         ],
@@ -969,7 +969,7 @@ export const htmlLessonsContent = [
   <source src="song.ogg" type="audio/ogg">
   הדפדפן שלך לא תומך בתגית audio.
 </audio>`,
-            output: 'נגן שמע עם כפתורי בקרה',
+            output: '<audio controls><source src="song.mp3" type="audio/mpeg"><source src="song.ogg" type="audio/ogg">הדפדפן שלך לא תומך בתגית audio.</audio>',
             explanationHE: '<p>מספקים מספר פורמטים - הדפדפן ישתמש בראשון שהוא תומך בו. הטקסט בתוך ה-audio יוצג רק אם הדפדפן לא תומך בכלל.</p>',
           },
           {
@@ -977,7 +977,7 @@ export const htmlLessonsContent = [
             code: `<audio controls loop preload="auto">
   <source src="background-music.mp3" type="audio/mpeg">
 </audio>`,
-            output: 'נגן שיתחיל בטעינת העמוד ויחזור על עצמו',
+            output: '<audio controls loop preload="auto"><source src="background-music.mp3" type="audio/mpeg"></audio>',
             explanationHE: '<p><code>preload="auto"</code> גורם לדפדפן לטעון את הקובץ מראש. שימושי למוזיקת רקע.</p>',
           },
         ],
@@ -1007,7 +1007,7 @@ export const htmlLessonsContent = [
   <source src="video.webm" type="video/webm">
   הדפדפן שלך לא תומך בתגית video.
 </video>`,
-            output: 'נגן וידאו עם תמונת תצוגה מקדימה',
+            output: '<video width="640" height="360" controls poster="thumbnail.jpg"><source src="video.mp4" type="video/mp4"><source src="video.webm" type="video/webm">הדפדפן שלך לא תומך בתגית video.</video>',
             explanationHE: '<p>התמונה ב-<code>poster</code> תוצג עד שהמשתמש ילחץ play. זה משפר את חווית המשתמש ומפחית את הטעינה הראשונית.</p>',
           },
         ],
@@ -1037,7 +1037,7 @@ export const htmlLessonsContent = [
   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
   allowfullscreen>
 </iframe>`,
-            output: 'נגן YouTube מוטמע שניתן להפעיל',
+            output: '<iframe width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',
             explanationHE: '<p>כדי לקבל את קוד ההטמעה מ-YouTube, לחצו על "שתף" ואז "הטמע" מתחת לסרטון.</p>',
           },
           {
@@ -1050,7 +1050,7 @@ export const htmlLessonsContent = [
   allowfullscreen="" 
   loading="lazy">
 </iframe>`,
-            output: 'מפה אינטראקטיבית של Google Maps',
+            output: '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13526.123456789..." width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>',
             explanationHE: '<p>כדי לקבל קוד הטמעה מ-Google Maps, חפשו מיקום, לחצו על "שתף" ובחרו "הטמע מפה".</p>',
           },
           {
@@ -1063,7 +1063,7 @@ export const htmlLessonsContent = [
     allowfullscreen>
   </iframe>
 </div>`,
-            output: 'iframe שמתאים את עצמו לגודל המסך',
+            output: '<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;"><iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" frameborder="0" allowfullscreen></iframe></div>',
             explanationHE: '<p><code>padding-bottom: 56.25%</code> שומר על יחס 16:9 (מחושב 9/16*100). שיטה זו עובדת מצוין לסרטונים רספונסיביים!</p>',
           },
         ],

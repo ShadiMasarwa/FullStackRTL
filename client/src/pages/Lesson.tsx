@@ -178,9 +178,7 @@ export default function LessonPage() {
                         <div>
                           <h5 className="text-sm font-medium text-muted-foreground mb-2 text-right">תוצאה:</h5>
                           <div className="bg-muted p-4 rounded-lg border border-border">
-                            <pre className="text-sm text-foreground whitespace-pre-wrap" dir="ltr">
-                              {example.output}
-                            </pre>
+                            <div className="text-sm text-foreground" dir="ltr" dangerouslySetInnerHTML={{ __html: example.output }} />
                           </div>
                         </div>
 

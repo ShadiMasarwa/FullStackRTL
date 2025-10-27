@@ -1,7 +1,7 @@
 # FullStackEDU - Hebrew Full-Stack Learning Platform
 
 ## Overview
-FullStackEDU is an educational web application for teaching Full-Stack development in Hebrew with RTL support. It offers 7 courses (HTML, CSS, Bootstrap, JavaScript, React, Node.js, MongoDB), structured into multi-page lessons with rich content and code examples. Key features include user authentication, progress tracking, interactive quizzes that gate lesson progression, and a certificate system upon course completion. The platform aims to provide a structured and engaging learning experience for Hebrew speakers.
+FullStackEDU is an educational web application for teaching Full-Stack development in Hebrew with RTL support. It offers 7 courses (HTML, CSS, Bootstrap, JavaScript, React, Node.js, MongoDB), structured into multi-page lessons with rich content and code examples. Key features include user authentication, progress tracking, interactive quizzes that gate lesson progression, and a certificate system upon course completion. **Code result windows display visual browser rendering output (actual HTML/CSS rendered as it appears in the browser), not text explanations.** The platform aims to provide a structured and engaging learning experience for Hebrew speakers.
 
 ## User Preferences
 Preferred communication style: Simple, everyday language.
@@ -15,6 +15,7 @@ Preferred communication style: Simple, everyday language.
 - **State Management**: React Context API for authentication, TanStack Query for server state, local component state for UI.
 - **Routing**: Wouter for client-side routing, including protected routes.
 - **Design Decisions**: Component-based, separation of concerns, custom hooks, progressive disclosure for lesson content.
+- **Code Output Rendering**: Code example outputs are rendered as live HTML/CSS using `dangerouslySetInnerHTML` to show actual browser rendering (visual output instead of text descriptions).
 
 ### Backend
 - **Server**: Express.js on Node.js with TypeScript.

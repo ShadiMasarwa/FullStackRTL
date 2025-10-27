@@ -102,7 +102,7 @@ const lessons: any = {
           {
             titleHE: 'סלקטור מחלקה',
             code: '.my-class {\n  color: blue;\n  padding: 10px;\n  border: 1px solid black;\n}',
-            output: 'טקסט כחול עם padding ובורדר',
+            output: '<div style="color: blue; padding: 10px; border: 1px solid black;">טקסט לדוגמה עם class="my-class"</div>',
             explanationHE: 'סלקטור מחלקה בוחר כל האלמנטים עם class="my-class"',
           },
         ],
@@ -118,7 +118,7 @@ const lessons: any = {
           {
             titleHE: 'משתני CSS',
             code: ':root {\n  --primary: #0066cc;\n}\n\nh1 {\n  color: var(--primary);\n  font-size: 2rem;\n}',
-            output: 'כותרת בצבע כחול בגודל 2rem',
+            output: '<h1 style="color: #0066cc; font-size: 2rem;">כותרת לדוגמה</h1>',
             explanationHE: 'משתני CSS מאפשרים שימוש חוזר בערכים',
           },
         ],
@@ -134,7 +134,7 @@ const lessons: any = {
           {
             titleHE: 'מיכל Flex',
             code: '.container {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n}',
-            output: 'אלמנטים מסודרים אופקית עם רווח ביניהם',
+            output: '<div style="display: flex; justify-content: space-between; align-items: center; border: 1px solid #ccc; padding: 10px;"><div style="background: #e3f2fd; padding: 10px;">פריט 1</div><div style="background: #e3f2fd; padding: 10px;">פריט 2</div><div style="background: #e3f2fd; padding: 10px;">פריט 3</div></div>',
             explanationHE: 'Flexbox מאפשר שליטה מלאה על פריסת אלמנטים',
           },
         ],
@@ -150,7 +150,7 @@ const lessons: any = {
           {
             titleHE: 'Grid פשוט',
             code: '.grid {\n  display: grid;\n  grid-template-columns: repeat(3, 1fr);\n  gap: 20px;\n}',
-            output: 'רשת עם 3 עמודות שוות',
+            output: '<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;"><div style="background: #e3f2fd; padding: 20px; text-align: center;">1</div><div style="background: #e3f2fd; padding: 20px; text-align: center;">2</div><div style="background: #e3f2fd; padding: 20px; text-align: center;">3</div><div style="background: #e3f2fd; padding: 20px; text-align: center;">4</div><div style="background: #e3f2fd; padding: 20px; text-align: center;">5</div><div style="background: #e3f2fd; padding: 20px; text-align: center;">6</div></div>',
             explanationHE: 'Grid מתאים לפריסות דו-ממדיות מורכבות',
           },
         ],
@@ -166,7 +166,7 @@ const lessons: any = {
           {
             titleHE: 'מיקום מוחלט',
             code: '.absolute {\n  position: absolute;\n  top: 10px;\n  left: 10px;\n  z-index: 10;\n}',
-            output: 'אלמנט ממוקם 10px מלמעלה ומשמאל',
+            output: '<div style="position: relative; height: 100px; border: 1px solid #ccc;"><div style="position: absolute; top: 10px; left: 10px; z-index: 10; background: #e3f2fd; padding: 10px;">אלמנט ממוקם</div></div>',
             explanationHE: 'מיקום מוחלט מוציא את האלמנט מזרימת המסמך',
           },
         ],
@@ -182,7 +182,7 @@ const lessons: any = {
           {
             titleHE: 'Media Query',
             code: '@media (max-width: 768px) {\n  .container {\n    flex-direction: column;\n  }\n}',
-            output: 'במובייל - עמודות מסודרות אנכית',
+            output: '<div style="display: flex; flex-direction: column; gap: 10px;"><div style="background: #e3f2fd; padding: 10px;">פריט 1</div><div style="background: #e3f2fd; padding: 10px;">פריט 2</div><div style="background: #e3f2fd; padding: 10px;">פריט 3</div></div><p style="font-size: 0.9em; color: #666; margin-top: 10px;">(במסכים רחבים: שורה אופקית, במסכים צרים: עמודה אנכית)</p>',
             explanationHE: 'Media Queries מאפשרים עיצוב רספונסיבי',
           },
         ],
@@ -198,7 +198,7 @@ const lessons: any = {
           {
             titleHE: 'כרטיס מוצר',
             code: '.card {\n  display: flex;\n  flex-direction: column;\n  border-radius: 8px;\n  box-shadow: 0 2px 8px rgba(0,0,0,0.1);\n  padding: 20px;\n}',
-            output: 'כרטיס מעוצב עם צללית ופינות מעוגלות',
+            output: '<div style="display: flex; flex-direction: column; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); padding: 20px; background: white; max-width: 300px;"><h3 style="margin: 0 0 10px 0;">כרטיס מוצר</h3><p style="margin: 0 0 10px 0; color: #666;">תיאור המוצר כאן</p><button style="padding: 10px; background: #0066cc; color: white; border: none; border-radius: 4px; cursor: pointer;">קנה עכשיו</button></div>',
             explanationHE: 'שילוב של Flexbox, Box Model ועיצוב מתקדם',
           },
         ],
