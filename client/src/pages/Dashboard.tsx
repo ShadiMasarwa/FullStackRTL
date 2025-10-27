@@ -136,12 +136,10 @@ export default function Dashboard() {
                       </div>
 
                       <Link href={`/course/${course.slug}`}>
-                        <a className="block">
-                          <Button className="w-full gap-2" data-testid={`button-enter-course-${course.slug}`}>
-                            <ArrowLeft className="h-4 w-4" />
-                            כניסה לקורס
-                          </Button>
-                        </a>
+                        <Button className="w-full gap-2" data-testid={`button-enter-course-${course.slug}`}>
+                          <ArrowLeft className="h-4 w-4" />
+                          כניסה לקורס
+                        </Button>
                       </Link>
                     </CardContent>
                   </Card>
