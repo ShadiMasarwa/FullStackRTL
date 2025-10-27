@@ -16,7 +16,16 @@ import Quiz from "@/pages/Quiz";
 import History from "@/pages/History";
 
 function ProtectedRoute({ component: Component }: { component: () => JSX.Element }) {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, isLoading } = useAuth();
+  
+  if (isLoading) {
+    return <div className="flex items-center justify-center min-h-screen">
+      <div className="text-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+        <p className="text-muted-foreground">טוען...</p>
+      </div>
+    </div>;
+  }
   
   if (!isAuthenticated) {
     return <Redirect to="/login" />;
