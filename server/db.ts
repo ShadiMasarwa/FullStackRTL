@@ -9,10 +9,9 @@ let isSeeded = false;
 
 export async function connectDB() {
   try {
-    // Disconnect any existing connections first
-    if (mongoose.connection.readyState !== 0) {
-      console.log('🔄 Disconnecting existing MongoDB connection...');
-      await mongoose.disconnect();
+    if (mongoose.connection.readyState === 1) {
+      console.log('📡 MongoDB already connected');
+      return;
     }
 
     const isProduction = process.env.NODE_ENV === 'production';
@@ -22,10 +21,12 @@ export async function connectDB() {
     if (isProduction && process.env.MONGODB_URI) {
       uri = process.env.MONGODB_URI;
     } else {
-      console.log('🚀 Starting MongoDB Memory Server...');
-      mongoServer = await MongoMemoryServer.create();
+      if (!mongoServer) {
+        console.log('🚀 Starting MongoDB Memory Server...');
+        mongoServer = await MongoMemoryServer.create();
+        console.log(`📦 MongoDB Memory Server URI: ${mongoServer.getUri()}`);
+      }
       uri = mongoServer.getUri();
-      console.log(`📦 MongoDB Memory Server URI: ${uri}`);
       shouldAutoSeed = true;
     }
 
