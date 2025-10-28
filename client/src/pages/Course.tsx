@@ -165,31 +165,36 @@ export default function Course() {
                     data-testid={`card-lesson-${lesson.slug}`}
                   >
                     <CardContent className="p-6">
-                      <div className="flex items-center gap-4">
-                        <div className="flex-shrink-0">{getStatusIcon(lesson.status)}</div>
+                      <div className="flex flex-col lg:flex-row lg:items-center gap-3 lg:gap-4">
+                        {/* Status Icon */}
+                        <div className="hidden lg:block flex-shrink-0">{getStatusIcon(lesson.status)}</div>
                         
-                        <div className="flex-1 min-w-0 text-right">
-                          <div className="flex items-center gap-3 mb-1 justify-end">
-                            <h3 className="text-lg font-semibold text-foreground">
-                              {lesson.titleHE}
-                            </h3>
-                            <span className="text-sm text-muted-foreground font-medium">
-                              שיעור {lesson.order}
-                            </span>
-                          </div>
+                        {/* Lesson Number */}
+                        <span className="text-sm text-muted-foreground font-medium lg:flex-shrink-0 text-right lg:text-center lg:min-w-[80px]">
+                          שיעור {lesson.order}
+                        </span>
+                        
+                        {/* Lesson Title */}
+                        <h3 className="text-lg font-semibold text-foreground flex-1 text-right">
+                          {lesson.titleHE}
+                        </h3>
+                        
+                        {/* Status Badge */}
+                        <div className="flex-shrink-0">
                           {getStatusBadge(lesson.status)}
                         </div>
 
+                        {/* Action Button */}
                         <div className="flex-shrink-0">
                           {!isLocked ? (
                             <Link href={`/lesson/${lesson.slug}`}>
-                              <Button className="gap-2" data-testid={`button-start-lesson-${lesson.slug}`}>
+                              <Button className="gap-2 w-full lg:w-auto" data-testid={`button-start-lesson-${lesson.slug}`}>
                                 <ArrowLeft className="h-4 w-4" />
                                 {lesson.status === 'done' ? 'חזרה לשיעור' : 'התחל שיעור'}
                               </Button>
                             </Link>
                           ) : (
-                            <Button disabled className="gap-2">
+                            <Button disabled className="gap-2 w-full lg:w-auto">
                               <Lock className="h-4 w-4" />
                               נעול
                             </Button>
