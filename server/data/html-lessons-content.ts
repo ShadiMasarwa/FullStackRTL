@@ -365,9 +365,9 @@ export const htmlLessonsContent = [
     ],
   },
 
-  // שיעור 3: כותרות, פסקאות ורשימות
+  // שיעור 4: כותרות, פסקאות ורשימות
   {
-    order: 9,
+    order: 4,
     titleHE: 'כותרות, פסקאות ורשימות',
     pages: [
       {
@@ -497,9 +497,9 @@ export const htmlLessonsContent = [
     ],
   },
 
-  // שיעור 4: קישורים ותמונות
+  // שיעור 5: קישורים ותמונות
   {
-    order: 4,
+    order: 5,
     titleHE: 'קישורים ותמונות',
     pages: [
       {
@@ -656,9 +656,9 @@ export const htmlLessonsContent = [
     ],
   },
 
-  // שיעור 5: טבלאות
+  // שיעור 6: טבלאות
   {
-    order: 5,
+    order: 6,
     titleHE: 'טבלאות',
     pages: [
       {
@@ -788,9 +788,9 @@ export const htmlLessonsContent = [
     ],
   },
 
-  // שיעור 6: טפסים בסיסיים
+  // שיעור 7: טפסים בסיסיים
   {
-    order: 6,
+    order: 7,
     titleHE: 'טפסים בסיסיים',
     pages: [
       {
@@ -936,9 +936,9 @@ export const htmlLessonsContent = [
     ],
   },
 
-  // שיעור 7: סמנטיקה
+  // שיעור 8: סמנטיקה
   {
-    order: 7,
+    order: 8,
     titleHE: 'סמנטיקה - header, nav, main, footer',
     pages: [
       {
@@ -1128,9 +1128,9 @@ export const htmlLessonsContent = [
     ],
   },
 
-  // שיעור 8: מולטימדיה
+  // שיעור 9: מולטימדיה
   {
-    order: 8,
+    order: 9,
     titleHE: 'מולטימדיה - audio, video, iframe',
     pages: [
       {
@@ -1261,9 +1261,9 @@ export const htmlLessonsContent = [
     ],
   },
 
-  // שיעור 9: קיצורי דרך ועצות ב-VS Code
+  // שיעור 10: קיצורי דרך ועצות ב-VS Code
   {
-    order: 9,
+    order: 10,
     titleHE: 'קיצורי דרך ועצות ב-VS Code',
     pages: [
       {
