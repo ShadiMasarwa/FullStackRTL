@@ -2,6 +2,63 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Code example output - restore HTML element styles */
+.code-output h1 {
+  font-size: 2em;
+  font-weight: bold;
+  margin: 0.67em 0;
+}
+
+.code-output h2 {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin: 0.75em 0;
+}
+
+.code-output h3 {
+  font-size: 1.17em;
+  font-weight: bold;
+  margin: 0.83em 0;
+}
+
+.code-output p {
+  margin: 1em 0;
+}
+
+.code-output table {
+  border-collapse: collapse;
+}
+
+.code-output th,
+.code-output td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.code-output th {
+  font-weight: bold;
+  background-color: #f2f2f2;
+}
+
+.code-output form {
+  margin: 1em 0;
+}
+
+.code-output input,
+.code-output select,
+.code-output textarea,
+.code-output button {
+  margin: 0.5em 0;
+  padding: 0.5em;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.code-output label {
+  display: inline-block;
+  margin-left: 0.5em;
+}
+
 /* LIGHT MODE */
 :root {
   --button-outline: rgba(0,0,0, .10);
