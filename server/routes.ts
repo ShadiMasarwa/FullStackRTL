@@ -203,9 +203,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
             lessonSlug: lesson.slug,
           });
 
-          let status = progress?.status || 'locked';
+          // TEMPORARY: Lock disabled for content review
+          // All lessons are accessible regardless of completion status
+          let status = progress?.status || 'in-progress';
           
-          if (index === 0 && !progress) {
+          if (!progress) {
             progress = await Progress.create({
               userId,
               courseSlug: slug,
@@ -217,6 +219,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
             status = 'in-progress';
           }
 
+          // COMMENTED OUT: Sequential lesson locking
+          // Will be re-enabled later per user request
+          /*
           if (index > 0) {
             const previousLesson = lessons[index - 1];
             const previousProgress = await Progress.findOne({
@@ -229,6 +234,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
               status = 'locked';
             }
           }
+          */
 
           return {
             _id: (lesson._id as any).toString(),
@@ -279,9 +285,15 @@ export async function registerRoutes(app: Express): Promise<Server> {
           score: 0,
           answers: [],
         });
-      } else if (progress.status === 'locked') {
+      }
+      
+      // TEMPORARY: Lock check disabled for content review
+      // Will be re-enabled later per user request
+      /*
+      else if (progress.status === 'locked') {
         return res.status(403).json({ message: 'השיעור נעול' });
       }
+      */
 
       return res.json({
         _id: (lesson._id as any).toString(),
@@ -315,7 +327,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       });
 
       return res.json({
-        status: progress?.status || 'locked',
+        status: progress?.status || 'in-progress', // TEMPORARY: Changed from 'locked' for content review
         score: progress?.score || 0,
         hasPassed: progress?.status === 'done',
       });
@@ -341,9 +353,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
         lessonSlug: lesson.slug,
       });
 
+      // TEMPORARY: Lock check disabled for content review
+      // Will be re-enabled later per user request
+      /*
       if (progress?.status === 'locked') {
         return res.status(403).json({ message: 'השיעור נעול' });
       }
+      */
 
       const quiz = await Quiz.findOne({ lessonId: lesson._id });
       if (!quiz) {

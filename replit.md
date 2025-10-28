@@ -12,6 +12,7 @@ FullStackEDU is an educational web application for teaching Full-Stack developme
 - **Implemented ScrollToTop component**: Added automatic scroll-to-top functionality when navigating between pages using wouter's useLocation hook.
 - **Added quiz skip functionality**: Users who have already passed a quiz can now skip it directly to the next lesson. A skip button appears at the top of the quiz page showing the previous score.
 - **Added progress status endpoint**: New API endpoint `/api/lessons/:slug/progress` returns lesson progress status (locked/in-progress/done) and whether the user has passed the quiz.
+- **TEMPORARY: Lesson locking disabled**: All lessons in all courses are now accessible regardless of completion status. This is a temporary change for content review and testing purposes. Sequential lesson locking will be re-enabled later per user request. See commented code in `server/routes.ts` marked "TEMPORARY: Lock disabled for content review".
 - **Important Note on Progress Persistence**: 
   - **Development Mode**: Uses MongoDB Memory Server (in-memory database) which resets on server restart. Progress is saved within a session but will be lost when the server restarts.
   - **Production Mode**: Would use a persistent MongoDB database (via MONGODB_URI env variable) where progress is permanently saved across sessions.
