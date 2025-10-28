@@ -69,9 +69,199 @@ export const htmlLessonsContent = [
     ],
   },
 
-  // שיעור 2: מבנה קובץ HTML בסיסי
+  // שיעור 2: הכנת סביבת עבודה ב-VS Code
   {
     order: 2,
+    titleHE: 'הכנת סביבת עבודה ב-VS Code',
+    pages: [
+      {
+        titleHE: 'יצירת תיקיית פרויקט חדשה',
+        contentHE: `
+          <p>לפני שמתחילים לכתוב קוד, חשוב ליצור <strong>תיקיית פרויקט מאורגנת</strong>. תיקייה זו תכיל את כל קבצי הפרויקט שלנו.</p>
+          <p><strong>שלבים ליצירת תיקייה:</strong></p>
+          <ol>
+            <li>צרו תיקייה חדשה במחשב (למשל: <code>my-first-website</code>)</li>
+            <li><strong>טיפ:</strong> השתמשו בשם באנגלית ללא רווחים (משתמשים ב-dash או underscore)</li>
+            <li>מיקום מומלץ: שולחן העבודה או תיקיית Documents</li>
+          </ol>
+          <p><strong>דוגמאות לשמות תיקייה:</strong></p>
+          <ul>
+            <li>✅ <code>my-portfolio</code> - טוב!</li>
+            <li>✅ <code>first_project</code> - טוב!</li>
+            <li>✅ <code>webProject2024</code> - טוב!</li>
+            <li>❌ <code>הפרויקט שלי</code> - לא מומלץ (עברית)</li>
+            <li>❌ <code>my project</code> - לא מומלץ (רווחים)</li>
+          </ul>
+        `,
+        codeExamples: [],
+      },
+      {
+        titleHE: 'פתיחת התיקייה ב-VS Code',
+        contentHE: `
+          <p>עכשיו נפתח את התיקייה שיצרנו ב-VS Code. יש <strong>שתי דרכים</strong> לעשות זאת:</p>
+          <p><strong>דרך 1: מתוך VS Code</strong></p>
+          <ol>
+            <li>פתחו את VS Code</li>
+            <li>לחצו על <code>File → Open Folder...</code> (או <kbd>Ctrl+K Ctrl+O</kbd>)</li>
+            <li>בחרו את התיקייה שיצרתם</li>
+            <li>לחצו על "Select Folder"</li>
+          </ol>
+          <p><strong>דרך 2: מהתיקייה עצמה (Windows)</strong></p>
+          <ol>
+            <li>פתחו את התיקייה בסייר הקבצים (File Explorer)</li>
+            <li>לחצו ימני בתוך התיקייה</li>
+            <li>בחרו "Open with Code"</li>
+          </ol>
+          <p><strong>למה חשוב לפתוח תיקייה ולא קובץ בודד?</strong></p>
+          <ul>
+            <li>VS Code יראה את כל הקבצים בפרויקט בסרגל הצד</li>
+            <li>תוכלו לנווט בקלות בין קבצים</li>
+            <li>תכונות כמו Auto-Complete יעבדו טוב יותר</li>
+            <li>Live Server יעבוד על כל הפרויקט</li>
+          </ul>
+        `,
+        codeExamples: [],
+      },
+      {
+        titleHE: 'יצירת קובץ index.html',
+        contentHE: `
+          <p>עכשיו ניצור את הקובץ הראשון שלנו - <strong>index.html</strong>.</p>
+          <p><strong>למה דווקא index.html?</strong></p>
+          <ul>
+            <li>זה שם סטנדרטי לעמוד הבית של אתר</li>
+            <li>שרתים אוטומטית מחפשים קובץ בשם index.html</li>
+            <li>למשל: אם נכנסים ל-<code>https://mysite.com/</code>, השרת יחפש <code>index.html</code></li>
+          </ul>
+          <p><strong>שתי דרכים ליצור את הקובץ:</strong></p>
+          <p><strong>דרך 1: דרך Explorer ב-VS Code</strong></p>
+          <ol>
+            <li>לחצו על אייקון "New File" בסרגל הצד (או <kbd>Ctrl+N</kbd>)</li>
+            <li>תופיע שורת הזנה - הקלידו: <code>index.html</code></li>
+            <li>לחצו Enter</li>
+          </ol>
+          <p><strong>דרך 2: באמצעות תפריט</strong></p>
+          <ol>
+            <li><code>File → New File</code></li>
+            <li><code>File → Save As...</code></li>
+            <li>שמרו בשם <code>index.html</code> בתוך תיקיית הפרויקט</li>
+          </ol>
+          <p><strong>טיפ חשוב:</strong> ודאו שהקובץ נשמר עם סיומת <code>.html</code> (לא <code>.txt</code>!).</p>
+        `,
+        codeExamples: [
+          {
+            titleHE: 'הקובץ הראשון שלנו',
+            code: `<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>הפרויקט הראשון שלי</title>
+</head>
+<body>
+  <h1>שלום עולם!</h1>
+  <p>זהו הפרויקט הראשון שלי ב-HTML.</p>
+</body>
+</html>`,
+            output: '<h1>שלום עולם!</h1><p>זהו הפרויקט הראשון שלי ב-HTML.</p>',
+            explanationHE: '<p>העתיקו את הקוד הזה ושמרו בקובץ <code>index.html</code>. זו נקודת ההתחלה לכל פרויקט HTML!</p>',
+          },
+        ],
+      },
+      {
+        titleHE: 'תוספים שימושיים ל-HTML',
+        contentHE: `
+          <p>מעבר ל-Live Server, יש עוד <strong>תוספים מומלצים</strong> שיעזרו לכם לכתוב HTML מהר יותר:</p>
+          <p><strong>תוספים חובה:</strong></p>
+          <ul>
+            <li><strong>Auto Rename Tag</strong> - משנה אוטומטית את תגית הסגירה כשאתם משנים את תגית הפתיחה</li>
+            <li><strong>HTML CSS Support</strong> - השלמה אוטומטית של קלאסים ו-IDs</li>
+            <li><strong>Prettier</strong> - מסדר את הקוד אוטומטית בצורה קריאה</li>
+          </ul>
+          <p><strong>תוספים נוספים (רשות):</strong></p>
+          <ul>
+            <li><strong>Auto Close Tag</strong> - סוגר תגיות אוטומטית</li>
+            <li><strong>Highlight Matching Tag</strong> - מדגיש את תגית הסגירה המתאימה</li>
+            <li><strong>HTML Snippets</strong> - קיצורי דרך נוספים</li>
+          </ul>
+          <p><strong>איך להתקין תוסף:</strong></p>
+          <ol>
+            <li>לחצו על אייקון Extensions (<kbd>Ctrl+Shift+X</kbd>)</li>
+            <li>חפשו את שם התוסף</li>
+            <li>לחצו על "Install"</li>
+            <li>לפעמים צריך לאתחל את VS Code (Reload)</li>
+          </ol>
+        `,
+        codeExamples: [
+          {
+            titleHE: 'בדיקה שהתוספים עובדים',
+            code: `<!-- נסו להקליד רק את תגית הפתיחה -->
+<div>
+  <p>טקסט כלשהו
+<!-- Auto Close Tag אמור לסגור את ה-p אוטומטית -->
+
+<!-- נסו לשנות div ל-section -->
+<div>
+  <h2>כותרת</h2>
+</div>
+<!-- Auto Rename Tag אמור לשנות את תגית הסגירה גם כן -->`,
+            output: '<div><p>טקסט כלשהו</p></div><section><h2>כותרת</h2></section>',
+            explanationHE: '<p>אם התוספים עובדים, תחסכו הרבה זמן! לא תצטרכו לסגור תגיות ידנית.</p>',
+          },
+        ],
+      },
+      {
+        titleHE: 'הרצת הפרויקט עם Live Server',
+        contentHE: `
+          <p>עכשיו שיש לנו קובץ <code>index.html</code>, בואו נראה אותו בדפדפן!</p>
+          <p><strong>איך להפעיל Live Server:</strong></p>
+          <p><strong>דרך 1: לחיצה ימנית</strong></p>
+          <ol>
+            <li>לחצו ימני על קובץ <code>index.html</code> ב-Explorer</li>
+            <li>בחרו "Open with Live Server"</li>
+          </ol>
+          <p><strong>דרך 2: כפתור בתחתית המסך</strong></p>
+          <ol>
+            <li>פתחו את קובץ <code>index.html</code></li>
+            <li>בתחתית המסך (Status Bar) תראו כפתור "Go Live"</li>
+            <li>לחצו עליו</li>
+          </ol>
+          <p><strong>מה יקרה?</strong></p>
+          <ul>
+            <li>הדפדפן יפתח אוטומטית</li>
+            <li>תראו את העמוד שלכם בכתובת כמו: <code>http://127.0.0.1:5500/index.html</code></li>
+            <li>כל שינוי שתעשו בקוד יתעדכן אוטומטית בדפדפן!</li>
+          </ul>
+          <p><strong>איך לעצור את Live Server:</strong></p>
+          <ul>
+            <li>לחצו על "Port: 5500" בתחתית המסך</li>
+            <li>או סתם סגרו את VS Code</li>
+          </ul>
+        `,
+        codeExamples: [
+          {
+            titleHE: 'נסו לעשות שינוי חי!',
+            code: `<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>בדיקת Live Server</title>
+</head>
+<body>
+  <h1>אם אתם רואים את זה - Live Server עובד!</h1>
+  <p>נסו לשנות את הטקסט הזה ושמרו (Ctrl+S).</p>
+  <p>הדף אמור להתעדכן <strong>אוטומטית</strong>!</p>
+</body>
+</html>`,
+            output: '<h1>אם אתם רואים את זה - Live Server עובד!</h1><p>נסו לשנות את הטקסט הזה ושמרו (Ctrl+S).</p><p>הדף אמור להתעדכן <strong>אוטומטית</strong>!</p>',
+            explanationHE: '<p><strong>ניסוי:</strong> שנו "שלום עולם" ל-"שלום HTML!" בקובץ, שמרו (<kbd>Ctrl+S</kbd>) - תראו את השינוי בדפדפן מיד!</p>',
+          },
+        ],
+      },
+    ],
+  },
+
+  // שיעור 3: מבנה קובץ HTML בסיסי
+  {
+    order: 3,
     titleHE: 'מבנה קובץ HTML בסיסי',
     pages: [
       {
@@ -177,7 +367,7 @@ export const htmlLessonsContent = [
 
   // שיעור 3: כותרות, פסקאות ורשימות
   {
-    order: 3,
+    order: 9,
     titleHE: 'כותרות, פסקאות ורשימות',
     pages: [
       {
@@ -1065,6 +1255,262 @@ export const htmlLessonsContent = [
 </div>`,
             output: '<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;"><iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" frameborder="0" allowfullscreen></iframe></div>',
             explanationHE: '<p><code>padding-bottom: 56.25%</code> שומר על יחס 16:9 (מחושב 9/16*100). שיטה זו עובדת מצוין לסרטונים רספונסיביים!</p>',
+          },
+        ],
+      },
+    ],
+  },
+
+  // שיעור 9: קיצורי דרך ועצות ב-VS Code
+  {
+    order: 9,
+    titleHE: 'קיצורי דרך ועצות ב-VS Code',
+    pages: [
+      {
+        titleHE: 'קיצור הדרך המהפכני: סימן קריאה (!)',
+        contentHE: `
+          <p>אחד <strong>הקיצורים הכי חשובים</strong> ב-VS Code ל-HTML הוא הסימן <code>!</code> (Exclamation Mark).</p>
+          <p><strong>מה זה עושה?</strong></p>
+          <ul>
+            <li>הקלידו <code>!</code> בתחילת קובץ HTML ריק</li>
+            <li>לחצו <kbd>Tab</kbd> או <kbd>Enter</kbd></li>
+            <li>VS Code יצור אוטומטית <strong>שלד HTML5 מלא</strong>!</li>
+          </ul>
+          <p><strong>למה זה חוסך זמן?</strong></p>
+          <ul>
+            <li>לא צריך לזכור את כל המבנה הבסיסי</li>
+            <li>לא צריך להקליד ידנית DOCTYPE, html, head, body</li>
+            <li>זה כבר כולל meta tags חשובים</li>
+            <li>חוסך לפחות דקה בכל פרויקט חדש!</li>
+          </ul>
+        `,
+        codeExamples: [
+          {
+            titleHE: 'לפני: הקלידו רק !',
+            code: `!`,
+            output: '',
+            explanationHE: '<p>רק תו <code>!</code> אחד, ואז לחצו <kbd>Tab</kbd>...</p>',
+          },
+          {
+            titleHE: 'אחרי: התוצאה המלאה!',
+            code: `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+</html>`,
+            output: '',
+            explanationHE: '<p><strong>וואו!</strong> כל זה מתו אחד. עכשיו רק תשנו <code>lang="en"</code> ל-<code>lang="he"</code> ותוסיפו <code>dir="rtl"</code>.</p>',
+          },
+        ],
+      },
+      {
+        titleHE: 'Emmet - קיצורי דרך חכמים',
+        contentHE: `
+          <p><strong>Emmet</strong> היא מערכת מובנית ב-VS Code שמאפשרת לכתוב HTML במהירות אדירה.</p>
+          <p><strong>קיצורים חשובים:</strong></p>
+          <ul>
+            <li><code>div.container</code> + <kbd>Tab</kbd> → <code>&lt;div class="container"&gt;&lt;/div&gt;</code></li>
+            <li><code>#header</code> + <kbd>Tab</kbd> → <code>&lt;div id="header"&gt;&lt;/div&gt;</code></li>
+            <li><code>ul>li*5</code> + <kbd>Tab</kbd> → רשימה עם 5 פריטים!</li>
+            <li><code>p{טקסט}</code> + <kbd>Tab</kbd> → פסקה עם תוכן</li>
+          </ul>
+          <p><strong>טיפ:</strong> תמיד לחצו <kbd>Tab</kbd> אחרי קיצור Emmet כדי להפעיל אותו.</p>
+        `,
+        codeExamples: [
+          {
+            titleHE: 'יצירת div עם class',
+            code: `<!-- הקלידו: div.card -->
+<div class="card"></div>
+
+<!-- הקלידו: div.hero.text-center -->
+<div class="hero text-center"></div>`,
+            output: '<div class="card"></div><div class="hero text-center"></div>',
+            explanationHE: '<p>נקודה (.) יוצרת class. אפשר להוסיף כמה classes שרוצים!</p>',
+          },
+          {
+            titleHE: 'יצירת div עם ID',
+            code: `<!-- הקלידו: #main -->
+<div id="main"></div>
+
+<!-- הקלידו: header#top -->
+<header id="top"></header>`,
+            output: '<div id="main"></div><header id="top"></header>',
+            explanationHE: '<p>סולמית (#) יוצרת ID. שימו לב שאפשר לשלב עם תגיות כמו header.</p>',
+          },
+          {
+            titleHE: 'כפל אלמנטים (*)',
+            code: `<!-- הקלידו: ul>li*5 -->
+<ul>
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+</ul>`,
+            output: '<ul><li></li><li></li><li></li><li></li><li></li></ul>',
+            explanationHE: '<p>כוכבית (*) כופלת אלמנטים. חוסך הרבה הקלדה!</p>',
+          },
+          {
+            titleHE: 'מבני קינון (>)',
+            code: `<!-- הקלידו: nav>ul>li*3>a -->
+<nav>
+  <ul>
+    <li><a href=""></a></li>
+    <li><a href=""></a></li>
+    <li><a href=""></a></li>
+  </ul>
+</nav>`,
+            output: '<nav><ul><li><a href=""></a></li><li><a href=""></a></li><li><a href=""></a></li></ul></nav>',
+            explanationHE: '<p>סימן > יוצר קינון. תארו כמה זמן זה חוסך!</p>',
+          },
+          {
+            titleHE: 'טקסט בתוך אלמנט ({})',
+            code: `<!-- הקלידו: p{שלום עולם} -->
+<p>שלום עולם</p>
+
+<!-- הקלידו: h1{כותרת ראשית}+p{תיאור} -->
+<h1>כותרת ראשית</h1>
+<p>תיאור</p>`,
+            output: '<p>שלום עולם</p><h1>כותרת ראשית</h1><p>תיאור</p>',
+            explanationHE: '<p>סוגריים מסולסלים {} מוסיפים תוכן. הפלוס (+) יוצר אלמנט אחיו.</p>',
+          },
+        ],
+      },
+      {
+        titleHE: 'קיצורי מקלדת חיוניים',
+        contentHE: `
+          <p>קיצורי דרך שיעשו אתכם <strong>מפתחים מהירים פי 10</strong>:</p>
+          <p><strong>קיצורים בסיסיים:</strong></p>
+          <ul>
+            <li><kbd>Ctrl + S</kbd> - שמירה (הכי חשוב!)</li>
+            <li><kbd>Ctrl + Z</kbd> - ביטול (Undo)</li>
+            <li><kbd>Ctrl + Shift + Z</kbd> - החזרה (Redo)</li>
+            <li><kbd>Ctrl + /</kbd> - הוספה/הסרה של הערה (Comment)</li>
+          </ul>
+          <p><strong>קיצורים מתקדמים:</strong></p>
+          <ul>
+            <li><kbd>Alt + ↑/↓</kbd> - הזז שורה למעלה/למטה</li>
+            <li><kbd>Shift + Alt + ↑/↓</kbd> - שכפל שורה</li>
+            <li><kbd>Ctrl + D</kbd> - בחר את הופעה הבאה של מילה (Multi-cursor)</li>
+            <li><kbd>Ctrl + Shift + L</kbd> - בחר את כל ההופעות של מילה</li>
+            <li><kbd>Ctrl + F</kbd> - חיפוש בקובץ</li>
+            <li><kbd>Ctrl + H</kbd> - חיפוש והחלפה</li>
+          </ul>
+        `,
+        codeExamples: [
+          {
+            titleHE: 'דוגמה לשכפול שורה',
+            code: `<!-- מקם את הסמן על השורה ולחץ Shift+Alt+↓ -->
+<div class="card">תוכן</div>
+<div class="card">תוכן</div>
+<div class="card">תוכן</div>`,
+            output: '<div class="card">תוכן</div><div class="card">תוכן</div><div class="card">תוכן</div>',
+            explanationHE: '<p>במקום Copy-Paste, רק <kbd>Shift+Alt+↓</kbd> פעמיים!</p>',
+          },
+          {
+            titleHE: 'דוגמה ל-Multi-cursor',
+            code: `<!-- סמן את "link" ולחץ Ctrl+D פעמיים -->
+<a href="#">link</a>
+<a href="#">link</a>
+<a href="#">link</a>
+<!-- עכשיו תוכל לשנות את כולם ביחד! -->`,
+            output: '<a href="#">link</a><a href="#">link</a><a href="#">link</a>',
+            explanationHE: '<p><strong>Multi-cursor</strong> מאפשר לערוך מספר מקומות בו-זמנית. משגע!</p>',
+          },
+        ],
+      },
+      {
+        titleHE: 'עצות לעבודה יעילה',
+        contentHE: `
+          <p><strong>10 עצות זהב לעבודה עם HTML ב-VS Code:</strong></p>
+          <ol>
+            <li><strong>השתמשו ב-Prettier</strong> - פורמט אוטומטי של הקוד (<kbd>Shift+Alt+F</kbd>)</li>
+            <li><strong>התקינו Auto Rename Tag</strong> - משנה תגית סגירה אוטומטית</li>
+            <li><strong>השתמשו בהערות</strong> - <code>&lt;!-- הערה --&gt;</code> לתיעוד הקוד</li>
+            <li><strong>ארגנו את הקוד</strong> - השתמשו ב-indent (טאב) להירארכיה ברורה</li>
+            <li><strong>קבעו theme נעים לעיניים</strong> - File → Preferences → Color Theme</li>
+            <li><strong>הגדילו/הקטינו גופן</strong> - <kbd>Ctrl + +</kbd> / <kbd>Ctrl + -</kbd></li>
+            <li><strong>פתחו שני קבצים זה ליד זה</strong> - גררו טאב לצד המסך</li>
+            <li><strong>שמרו אוטומטית</strong> - File → Auto Save</li>
+            <li><strong>השתמשו ב-Breadcrumbs</strong> - ניווט מהיר במבנה הקובץ</li>
+            <li><strong>תרגלו!</strong> - ככל שתשתמשו בקיצורים, תהיו מהירים יותר</li>
+          </ol>
+        `,
+        codeExamples: [
+          {
+            titleHE: 'קוד מאורגן vs. לא מאורגן',
+            code: `<!-- ❌ לא טוב - ללא indent -->
+<div>
+<h1>כותרת</h1>
+<p>טקסט</p>
+</div>
+
+<!-- ✅ טוב - עם indent נכון -->
+<div>
+  <h1>כותרת</h1>
+  <p>טקסט</p>
+</div>`,
+            output: '<div><h1>כותרת</h1><p>טקסט</p></div><div><h1>כותרת</h1><p>טקסט</p></div>',
+            explanationHE: '<p>קוד מאורגן קל יותר לקריאה ולתחזוקה. <strong>Prettier</strong> עושה את זה אוטומטית!</p>',
+          },
+        ],
+      },
+      {
+        titleHE: 'מתחילים פרויקט חדש? Checklist!',
+        contentHE: `
+          <p><strong>רשימת בדיקות לפני שמתחילים לקוד:</strong></p>
+          <ul class="task-list">
+            <li>✅ יצרתי תיקיית פרויקט עם שם ברור (באנגלית, ללא רווחים)</li>
+            <li>✅ פתחתי את התיקייה ב-VS Code (<code>File → Open Folder</code>)</li>
+            <li>✅ יצרתי קובץ <code>index.html</code></li>
+            <li>✅ השתמשתי ב-<code>!</code> ליצירת שלד HTML5</li>
+            <li>✅ שיניתי <code>lang="he"</code> והוספתי <code>dir="rtl"</code></li>
+            <li>✅ Live Server מותקן ורץ (<code>Go Live</code> בתחתית המסך)</li>
+            <li>✅ יצרתי תיקיית <code>images</code> אם אני משתמש בתמונות</li>
+            <li>✅ יצרתי תיקיית <code>css</code> אם אני מוסיף CSS בהמשך</li>
+          </ul>
+          <p><strong>טיפ אחרון:</strong> תרגלו הרבה! HTML זה כמו רכיבה על אופניים - ככל שתתרגלו, זה יהפוך לאינטואיטיבי.</p>
+        `,
+        codeExamples: [
+          {
+            titleHE: 'תבנית התחלה מושלמת',
+            code: `<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="תיאור קצר של העמוד (חשוב ל-SEO)">
+  <meta name="author" content="שמך">
+  <title>שם העמוד - שם האתר</title>
+  <!-- קישור לCSS -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  
+  <header>
+    <h1>כותרת ראשית</h1>
+  </header>
+  
+  <main>
+    <!-- התוכן הראשי כאן -->
+  </main>
+  
+  <footer>
+    <p>&copy; 2024 שמך. כל הזכויות שמורות.</p>
+  </footer>
+  
+  <!-- קישור ל-JavaScript בסוף -->
+  <script src="js/main.js"></script>
+</body>
+</html>`,
+            output: '<header><h1>כותרת ראשית</h1></header><main></main><footer><p>&copy; 2024 שמך. כל הזכויות שמורות.</p></footer>',
+            explanationHE: '<p>זו תבנית מושלמת להתחלת כל פרויקט חדש. שמרו אותה כ-<code>template.html</code> ותשתמשו בה שוב ושוב!</p>',
           },
         ],
       },
