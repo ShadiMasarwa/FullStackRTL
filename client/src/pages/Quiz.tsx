@@ -12,6 +12,16 @@ import { apiRequest, queryClient } from '@/lib/queryClient';
 import { CheckCircle, XCircle, ArrowRight, ArrowLeft, RotateCcw } from 'lucide-react';
 import type { ClientQuiz, QuizResult, Lesson } from '@shared/schema';
 
+// Shuffle array using Fisher-Yates algorithm
+function shuffleArray<T>(array: T[]): T[] {
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+}
+
 export default function Quiz() {
   const [, params] = useRoute('/quiz/:lessonSlug');
   const [, setLocation] = useLocation();
@@ -21,6 +31,8 @@ export default function Quiz() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswers, setSelectedAnswers] = useState<(number | null)[]>([]);
   const [quizResult, setQuizResult] = useState<QuizResult | null>(null);
+  // Store shuffled order for each question: maps display index -> original index
+  const [shuffledOrders, setShuffledOrders] = useState<number[][]>([]);
 
   const { data: lesson } = useQuery<Lesson>({
     queryKey: [`/api/lessons/${lessonSlug}`],
@@ -32,10 +44,17 @@ export default function Quiz() {
     enabled: !!lessonSlug,
   });
 
-  // Initialize selectedAnswers when quiz loads
+  // Initialize selectedAnswers and shuffle answer order when quiz loads
   useEffect(() => {
     if (quiz && quiz.questions && quiz.questions.length > 0 && selectedAnswers.length === 0) {
       setSelectedAnswers(Array(quiz.questions.length).fill(null));
+      
+      // Create shuffled orders for all questions
+      const orders = quiz.questions.map(q => {
+        const indices = Array.from({ length: q.choicesHE.length }, (_, i) => i);
+        return shuffleArray(indices);
+      });
+      setShuffledOrders(orders);
     }
   }, [quiz]);
 
@@ -112,6 +131,15 @@ export default function Quiz() {
     setQuizResult(null);
     setSelectedAnswers(Array(quiz.questions.length).fill(null));
     setCurrentQuestion(0);
+    
+    // Re-shuffle answers on retry
+    if (quiz && quiz.questions) {
+      const orders = quiz.questions.map(q => {
+        const indices = Array.from({ length: q.choicesHE.length }, (_, i) => i);
+        return shuffleArray(indices);
+      });
+      setShuffledOrders(orders);
+    }
   };
 
   const goToNextLesson = () => {
@@ -157,6 +185,12 @@ export default function Quiz() {
             {quiz.questions.map((question, index) => {
               const result = quizResult.results[index];
               const isCorrect = result.isCorrect;
+              
+              // Get shuffled order for this question
+              const questionShuffledOrder = shuffledOrders[index] || [];
+              const questionShuffledChoices = questionShuffledOrder.map(originalIndex => 
+                question.choicesHE[originalIndex]
+              );
 
               return (
                 <Card key={index} className={`border-2 ${isCorrect ? 'border-green-500/30' : 'border-red-500/30'}`}>
@@ -174,13 +208,14 @@ export default function Quiz() {
                           שאלה {index + 1}: {question.promptHE}
                         </h3>
                         <div className="space-y-2">
-                          {question.choicesHE.map((choice, choiceIndex) => {
-                            const isChosen = result.chosenIndex === choiceIndex;
-                            const isCorrectAnswer = result.correctIndex === choiceIndex;
+                          {questionShuffledChoices.map((choice, displayIndex) => {
+                            const originalIndex = questionShuffledOrder[displayIndex];
+                            const isChosen = result.chosenIndex === originalIndex;
+                            const isCorrectAnswer = result.correctIndex === originalIndex;
 
                             return (
                               <div
-                                key={choiceIndex}
+                                key={displayIndex}
                                 className={`p-3 rounded-lg border-2 ${
                                   isCorrectAnswer
                                     ? 'border-green-500 bg-green-500/5'
@@ -243,6 +278,12 @@ export default function Quiz() {
   const question = quiz.questions[currentQuestion];
   const isLastQuestion = currentQuestion === quiz.questions.length - 1;
   
+  // Get shuffled choices for current question
+  const currentShuffledOrder = shuffledOrders[currentQuestion] || [];
+  const shuffledChoices = currentShuffledOrder.map(originalIndex => 
+    question.choicesHE[originalIndex]
+  );
+  
   // Helper to check if a question is answered with a valid numeric answer
   const isAnswered = (idx: number) => {
     const answer = selectedAnswers[idx];
@@ -286,25 +327,28 @@ export default function Quiz() {
               }}
             >
               <div className="space-y-3">
-                {question.choicesHE.map((choice, index) => (
-                  <div
-                    key={index}
-                    className={`flex items-center p-4 rounded-lg border-2 transition-all cursor-pointer hover-elevate ${
-                      selectedAnswers[currentQuestion] === index
-                        ? 'border-primary bg-primary/5'
-                        : 'border-border bg-card'
-                    }`}
-                    onClick={() => handleAnswerSelect(index)}
-                  >
-                    <RadioGroupItem value={index.toString()} id={`choice-${index}`} className="ml-3" />
-                    <Label
-                      htmlFor={`choice-${index}`}
-                      className="flex-1 text-right cursor-pointer text-base"
+                {shuffledChoices.map((choice, displayIndex) => {
+                  const originalIndex = currentShuffledOrder[displayIndex];
+                  return (
+                    <div
+                      key={displayIndex}
+                      className={`flex items-center p-4 rounded-lg border-2 transition-all cursor-pointer hover-elevate ${
+                        selectedAnswers[currentQuestion] === originalIndex
+                          ? 'border-primary bg-primary/5'
+                          : 'border-border bg-card'
+                      }`}
+                      onClick={() => handleAnswerSelect(originalIndex)}
                     >
-                      {choice}
-                    </Label>
-                  </div>
-                ))}
+                      <RadioGroupItem value={originalIndex.toString()} id={`choice-${displayIndex}`} className="ml-3" />
+                      <Label
+                        htmlFor={`choice-${displayIndex}`}
+                        className="flex-1 text-right cursor-pointer text-base"
+                      >
+                        {choice}
+                      </Label>
+                    </div>
+                  );
+                })}
               </div>
             </RadioGroup>
           </CardContent>
