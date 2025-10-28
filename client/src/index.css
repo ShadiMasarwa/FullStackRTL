@@ -70,6 +70,7 @@ pre code.hljs {
   line-height: 1.5;
   text-align: left;
   direction: ltr;
+  color: #d4d4d4 !important;
 }
 
 pre {
@@ -82,6 +83,7 @@ pre code {
   direction: ltr;
   text-align: left;
   unicode-bidi: embed;
+  color: #d4d4d4;
 }
 
 /* LIGHT MODE */
