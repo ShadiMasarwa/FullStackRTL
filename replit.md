@@ -3,6 +3,12 @@
 ## Overview
 FullStackEDU is an educational web application for teaching Full-Stack development in Hebrew with RTL support. It offers 7 courses (HTML, CSS, Bootstrap, JavaScript, React, Node.js, MongoDB), structured into multi-page lessons with rich content and code examples. Key features include user authentication, progress tracking, interactive quizzes that gate lesson progression, and a certificate system upon course completion. **Code result windows display visual browser rendering output (actual HTML/CSS rendered as it appears in the browser), not text explanations.** The platform aims to provide a structured and engaging learning experience for Hebrew speakers.
 
+## Recent Changes (October 28, 2025)
+- **Expanded HTML Course from 8 to 9 lessons** by adding two new lessons:
+  - **Lesson 2: "הכנת סביבת עבודה ב-VS Code"** - Workspace setup covering folder creation, opening projects in VS Code, creating index.html files, installing useful extensions (Auto Rename Tag, HTML CSS Support, Prettier), and running Live Server.
+  - **Lesson 9: "קיצורי דרך ועצות ב-VS Code"** - Productivity tips including the `!` shortcut for HTML5 boilerplate, Emmet abbreviations (div.class, #id, ul>li*5, etc.), essential keyboard shortcuts (Ctrl+S, Ctrl+D for multi-cursor), and best practices for efficient HTML development.
+- **Updated lesson numbering**: Previous lessons 2-8 shifted to 3-9 to accommodate the new lesson 2.
+
 ## User Preferences
 Preferred communication style: Simple, everyday language.
 
