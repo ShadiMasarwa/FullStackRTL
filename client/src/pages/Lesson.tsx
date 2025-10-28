@@ -7,6 +7,17 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { LessonDiscussion } from '@/components/LessonDiscussion';
 import { ArrowRight, ArrowLeft, Code2, ChevronLeft, ChevronRight } from 'lucide-react';
 import type { Lesson } from '@shared/schema';
+import hljs from 'highlight.js/lib/core';
+import javascript from 'highlight.js/lib/languages/javascript';
+import xml from 'highlight.js/lib/languages/xml';
+import css from 'highlight.js/lib/languages/css';
+import 'highlight.js/styles/vs2015.css';
+
+// Register languages
+hljs.registerLanguage('javascript', javascript);
+hljs.registerLanguage('html', xml);
+hljs.registerLanguage('xml', xml);
+hljs.registerLanguage('css', css);
 
 export default function LessonPage() {
   const [, params] = useRoute('/lesson/:slug');
@@ -22,6 +33,20 @@ export default function LessonPage() {
   useEffect(() => {
     setCurrentPageIndex(0);
   }, [lessonSlug, lesson?.pages]);
+
+  // Apply syntax highlighting to code blocks
+  useEffect(() => {
+    document.querySelectorAll('pre code').forEach((block) => {
+      const codeText = block.textContent || '';
+      
+      // Use highlight.js auto-detection for accurate language recognition
+      const result = hljs.highlightAuto(codeText, ['javascript', 'html', 'css']);
+      
+      // Apply the detected language and highlighted code
+      block.className = `text-sm font-mono language-${result.language || 'html'}`;
+      block.innerHTML = result.value;
+    });
+  }, [currentPageIndex, lesson]);
 
   if (!lessonSlug) {
     return <div className="text-center py-12">שיעור לא נמצא</div>;
@@ -167,8 +192,8 @@ export default function LessonPage() {
                         {/* Code */}
                         <div>
                           <h5 className="text-sm font-medium text-muted-foreground mb-2 text-right">קוד:</h5>
-                          <pre className="bg-card p-4 rounded-lg overflow-x-auto border border-border">
-                            <code className="text-sm font-mono text-card-foreground" dir="ltr">
+                          <pre className="bg-[#1e1e1e] p-4 rounded-lg overflow-x-auto border border-border" dir="ltr">
+                            <code className="text-sm font-mono" dir="ltr">
                               {example.code}
                             </code>
                           </pre>

@@ -59,6 +59,31 @@
   margin-left: 0.5em;
 }
 
+/* Code block styling - VS Code style */
+pre code.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0 !important;
+  background: transparent !important;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 14px;
+  line-height: 1.5;
+  text-align: left;
+  direction: ltr;
+}
+
+pre {
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Ensure code blocks always use LTR */
+pre code {
+  direction: ltr;
+  text-align: left;
+  unicode-bidi: embed;
+}
+
 /* LIGHT MODE */
 :root {
   --button-outline: rgba(0,0,0, .10);

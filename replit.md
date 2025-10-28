@@ -16,6 +16,7 @@ Preferred communication style: Simple, everyday language.
 - **Routing**: Wouter for client-side routing, including protected routes.
 - **Design Decisions**: Component-based, separation of concerns, custom hooks, progressive disclosure for lesson content.
 - **Code Output Rendering**: Code example outputs are rendered as live HTML/CSS using `dangerouslySetInnerHTML` to show actual browser rendering (visual output instead of text descriptions).
+- **Syntax Highlighting**: Code blocks use highlight.js with VS Code Dark theme (vs2015) for syntax highlighting, supporting HTML, CSS, and JavaScript with LTR text alignment.
 
 ### Backend
 - **Server**: Express.js on Node.js with TypeScript.
