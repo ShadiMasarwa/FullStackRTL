@@ -16,7 +16,8 @@ Preferred communication style: Simple, everyday language.
 - **Routing**: Wouter for client-side routing, including protected routes.
 - **Design Decisions**: Component-based, separation of concerns, custom hooks, progressive disclosure for lesson content.
 - **Code Output Rendering**: Code example outputs are rendered as live HTML/CSS using `dangerouslySetInnerHTML` to show actual browser rendering (visual output instead of text descriptions).
-- **Syntax Highlighting**: Code blocks use highlight.js with VS Code Dark theme (vs2015) for syntax highlighting, supporting HTML, CSS, and JavaScript with LTR text alignment.
+- **Syntax Highlighting**: Code blocks use highlight.js with VS Code Dark theme (vs2015) for syntax highlighting, supporting HTML, CSS, and JavaScript with LTR text alignment. Code text color is #d4d4d4 (light gray) on #1e1e1e background for optimal readability.
+- **Quiz Answer Randomization**: Quiz answers are shuffled randomly using Fisher-Yates algorithm when quiz loads. Each retry re-shuffles answers. Display order maps to original indices for server validation. Results screen maintains the same shuffled order shown during the quiz.
 
 ### Backend
 - **Server**: Express.js on Node.js with TypeScript.
