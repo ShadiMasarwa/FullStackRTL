@@ -298,6 +298,33 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  app.get('/api/lessons/:slug/progress', authMiddleware, async (req: AuthRequest, res) => {
+    try {
+      const { slug } = req.params;
+      const userId = req.userId!;
+      
+      const lesson = await Lesson.findOne({ slug });
+      if (!lesson) {
+        return res.status(404).json({ message: 'השיעור לא נמצא' });
+      }
+
+      const progress = await Progress.findOne({
+        userId,
+        courseSlug: lesson.courseSlug,
+        lessonSlug: lesson.slug,
+      });
+
+      return res.json({
+        status: progress?.status || 'locked',
+        score: progress?.score || 0,
+        hasPassed: progress?.status === 'done',
+      });
+    } catch (error) {
+      console.error('Get lesson progress error:', error);
+      return res.status(500).json({ message: 'שגיאת שרת' });
+    }
+  });
+
   app.get('/api/lessons/:slug/quiz', authMiddleware, async (req: AuthRequest, res) => {
     try {
       const { slug } = req.params;

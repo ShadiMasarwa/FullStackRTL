@@ -9,6 +9,13 @@ FullStackEDU is an educational web application for teaching Full-Stack developme
   - **Lesson 10: "קיצורי דרך ועצות ב-VS Code"** - Productivity tips including the `!` shortcut for HTML5 boilerplate, Emmet abbreviations (div.class, #id, ul>li*5, etc.), essential keyboard shortcuts (Ctrl+S, Ctrl+D for multi-cursor), and best practices for efficient HTML development.
 - **Updated lesson numbering**: Previous lessons 2-8 shifted to 3-9 to accommodate the new lesson 2.
 - **Fixed quiz alignment**: Created dedicated quizzes for lessons 2 and 10, and shifted all quizzes 2-8 to 3-9 to match the updated lesson order. Each lesson now has a quiz matching its specific content.
+- **Implemented ScrollToTop component**: Added automatic scroll-to-top functionality when navigating between pages using wouter's useLocation hook.
+- **Added quiz skip functionality**: Users who have already passed a quiz can now skip it directly to the next lesson. A skip button appears at the top of the quiz page showing the previous score.
+- **Added progress status endpoint**: New API endpoint `/api/lessons/:slug/progress` returns lesson progress status (locked/in-progress/done) and whether the user has passed the quiz.
+- **Important Note on Progress Persistence**: 
+  - **Development Mode**: Uses MongoDB Memory Server (in-memory database) which resets on server restart. Progress is saved within a session but will be lost when the server restarts.
+  - **Production Mode**: Would use a persistent MongoDB database (via MONGODB_URI env variable) where progress is permanently saved across sessions.
+  - **Current Behavior**: Progress is successfully saved to the database and persists within the same login session. However, when the server restarts (which resets the in-memory database), all progress is lost and the seed script recreates the initial state.
 
 ## User Preferences
 Preferred communication style: Simple, everyday language.

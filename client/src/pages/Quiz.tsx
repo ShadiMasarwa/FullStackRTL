@@ -9,8 +9,8 @@ import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
 import { useToast } from '@/hooks/use-toast';
 import { apiRequest, queryClient } from '@/lib/queryClient';
-import { CheckCircle, XCircle, ArrowRight, ArrowLeft, RotateCcw } from 'lucide-react';
-import type { ClientQuiz, QuizResult, Lesson } from '@shared/schema';
+import { CheckCircle, XCircle, ArrowRight, ArrowLeft, RotateCcw, SkipForward } from 'lucide-react';
+import type { ClientQuiz, QuizResult, Lesson, LessonProgressStatus, LessonWithStatus } from '@shared/schema';
 
 // Shuffle array using Fisher-Yates algorithm
 function shuffleArray<T>(array: T[]): T[] {
@@ -37,6 +37,16 @@ export default function Quiz() {
   const { data: lesson } = useQuery<Lesson>({
     queryKey: [`/api/lessons/${lessonSlug}`],
     enabled: !!lessonSlug,
+  });
+
+  const { data: progressStatus } = useQuery<LessonProgressStatus>({
+    queryKey: [`/api/lessons/${lessonSlug}/progress`],
+    enabled: !!lessonSlug,
+  });
+
+  const { data: courseLessons } = useQuery<LessonWithStatus[]>({
+    queryKey: [`/api/courses/${lesson?.courseSlug}/lessons`],
+    enabled: !!lesson?.courseSlug,
   });
 
   const { data: quiz, isLoading } = useQuery<ClientQuiz>({
@@ -143,7 +153,19 @@ export default function Quiz() {
   };
 
   const goToNextLesson = () => {
-    if (lesson?.courseSlug) {
+    if (!lesson || !courseLessons) {
+      return;
+    }
+
+    // Find current lesson index
+    const currentIndex = courseLessons.findIndex(l => l.slug === lesson.slug);
+    
+    // Check if there's a next lesson
+    if (currentIndex >= 0 && currentIndex < courseLessons.length - 1) {
+      const nextLesson = courseLessons[currentIndex + 1];
+      setLocation(`/lesson/${nextLesson.slug}`);
+    } else {
+      // No next lesson, go back to course page
       setLocation(`/course/${lesson.courseSlug}`);
     }
   };
@@ -297,6 +319,33 @@ export default function Quiz() {
   return (
     <div className="min-h-[calc(100vh-4rem)] bg-background">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        {/* Skip Option for Passed Quizzes */}
+        {progressStatus?.hasPassed && (
+          <Card className="mb-6 border-green-500/30 bg-green-500/5">
+            <CardContent className="p-4">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <CheckCircle className="h-6 w-6 text-green-500" />
+                  <div className="text-right">
+                    <p className="font-semibold text-foreground">כבר עברת את השאלון הזה</p>
+                    <p className="text-sm text-muted-foreground">ציון קודם: {progressStatus.score}/100</p>
+                  </div>
+                </div>
+                <Button
+                  variant="outline"
+                  size="lg"
+                  onClick={goToNextLesson}
+                  className="gap-2"
+                  data-testid="button-skip-quiz"
+                >
+                  <SkipForward className="h-5 w-5" />
+                  דלג לשיעור הבא
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        )}
+
         {/* Progress Indicator */}
         <div className="mb-8">
           <div className="flex items-center justify-between text-sm text-muted-foreground mb-2">

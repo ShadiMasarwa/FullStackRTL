@@ -195,6 +195,14 @@ export const learningHistoryItemSchema = z.object({
 
 export type LearningHistoryItem = z.infer<typeof learningHistoryItemSchema>;
 
+export const lessonProgressStatusSchema = z.object({
+  status: z.enum(["locked", "in-progress", "done"]),
+  score: z.number(),
+  hasPassed: z.boolean(),
+});
+
+export type LessonProgressStatus = z.infer<typeof lessonProgressStatusSchema>;
+
 // ============================================
 // Auth Response Types
 // ============================================
