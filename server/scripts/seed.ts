@@ -219,53 +219,67 @@ function generateQuizQuestions(courseSlug: string, lessonOrder: number) {
         { promptHE: 'איך מפעילים את Live Server על קובץ HTML?', choicesHE: ['לחיצה ימנית על הקובץ ובחירה ב-"Open with Live Server"', 'לחיצה על F12', 'כתיבת "live" בשורת הפקודה', 'שמירת הקובץ פעמיים'], correctIndex: 0 },
       ],
       2: [
+        { promptHE: 'למה חשוב ליצור תיקייה ייעודית לכל פרויקט?', choicesHE: ['כדי לשמור על סדר ולנהל קבצים בצורה מאורגנת', 'כדי שה-HTML יעבוד מהר יותר', 'זה חובה על-פי חוק', 'כדי לחסוך מקום בדיסק'], correctIndex: 0 },
+        { promptHE: 'איזו הרחבה עוזרת לסגור תגיות HTML אוטומטית?', choicesHE: ['Auto Rename Tag - משנה תגיות פתיחה וסגירה ביחד', 'Live Server', 'Prettier', 'HTML Preview'], correctIndex: 0 },
+        { promptHE: 'מה עושה ההרחבה HTML CSS Support?', choicesHE: ['מספקת השלמה אוטומטית של שמות מחלקות ו-IDs', 'מפעילה את הדפדפן אוטומטית', 'משנה צבעים בקוד', 'מדפיסה את הקוד'], correctIndex: 0 },
+        { promptHE: 'למה משמשת ההרחבה Prettier?', choicesHE: ['לפרמט (יישור) קוד אוטומטי בלחיצת Ctrl+S', 'להוספת תמונות לפרויקט', 'להרצת קוד JavaScript', 'לבדיקת שגיאות בזמן אמת'], correctIndex: 0 },
+        { promptHE: 'איך פותחים תיקייה ב-VS Code?', choicesHE: ['File > Open Folder ובחירת התיקייה', 'לחיצה כפולה על קובץ HTML', 'גרירת קובץ לחלון VS Code', 'לחיצה על Ctrl+N'], correctIndex: 0 },
+      ],
+      3: [
         { promptHE: 'מהי משמעות הצהרת DOCTYPE html<!?', choicesHE: ['מודיעה לדפדפן שזהו מסמך HTML5', 'מגדירה את צבעי העמוד', 'יוצרת קישור לקובץ CSS', 'מכילה תמונות'], correctIndex: 0 },
         { promptHE: 'מה ההבדל בין תגית <head> לתגית <body>?', choicesHE: ['head מכילה מטא-מידע, body מכילה תוכן גלוי', 'head מכילה תמונות, body מכילה טקסט', 'אין הבדל ביניהן', 'head היא אופציונלית'], correctIndex: 0 },
         { promptHE: 'למה חשוב להגדיר charset="UTF-8" בתגית meta?', choicesHE: ['כדי לתמוך בכל התווים העבריים והבינלאומיים', 'כדי להאיץ את טעינת העמוד', 'כדי להגדיר את הצבעים', 'כדי להוסיף אנימציות'], correctIndex: 0 },
         { promptHE: 'מה עושה התכונה dir="rtl" בתגית html?', choicesHE: ['קובעת כיוון מימין לשמאל (Right-To-Left)', 'מגדירה את גודל הטקסט', 'קובעת את צבע הרקע', 'מוסיפה סרגל גלילה'], correctIndex: 0 },
         { promptHE: 'מה מוצג בטאב הדפדפן?', choicesHE: ['התוכן של תגית <title> שב-<head>', 'התוכן של תגית <body>', 'שם קובץ ה-HTML', 'כתובת ה-URL בלבד'], correctIndex: 0 },
       ],
-      3: [
+      4: [
         { promptHE: 'כמה רמות כותרות (Headings) קיימות ב-HTML?', choicesHE: ['6 רמות: h1 עד h6', '4 רמות: h1 עד h4', '10 רמות: h1 עד h10', '3 רמות: h1 עד h3'], correctIndex: 0 },
         { promptHE: 'מהו החוק החשוב ביותר לגבי שימוש בתגית h1?', choicesHE: ['רק אחת לעמוד - הכותרת הראשית', 'אפשר להשתמש בה כמה שרוצים', 'חובה לכתוב אותה באנגלית', 'אסור להשתמש בה בכלל'], correctIndex: 0 },
         { promptHE: 'מדוע לא מומלץ להשתמש בהרבה תגיות br< ליצירת רווחים?', choicesHE: ['עדיף להשתמש ב-CSS עם margins ו-padding', 'זה גורם לעמוד לקרוס', 'זה נחשב לוירוס', 'הדפדפנים לא תומכים בזה'], correctIndex: 0 },
         { promptHE: 'מתי נשתמש ברשימה ממוספרת ol< במקום רשימה עם נקודות ul<?', choicesHE: ['כשהסדר חשוב, כמו שלבי הוראות', 'כשיש פחות מ-3 פריטים', 'כשהפריטים באנגלית', 'רק בטבלאות'], correctIndex: 0 },
         { promptHE: 'איך יוצרים רשימה מקוננת (רשימה בתוך רשימה)?', choicesHE: ['שמים ul או ol חדשה בתוך תגית li', 'שמים שתי תגיות ul זו אחרי זו', 'משתמשים בתגית nest', 'זה לא אפשרי ב-HTML'], correctIndex: 0 },
       ],
-      4: [
+      5: [
         { promptHE: 'מהי התכונה החשובה ביותר בתגית a< ליצירת קישור?', choicesHE: ['href - מגדירה לאן הקישור מוביל', 'src - מגדירה את מקור הקישור', 'link - יוצרת את הקישור', 'url - מכילה את הכתובת'], correctIndex: 0 },
         { promptHE: 'איך פותחים קישור בטאב חדש?', choicesHE: ['target="_blank" ורצוי להוסיף rel="noopener"', 'new="tab"', 'window="new"', 'open="true"'], correctIndex: 0 },
         { promptHE: 'מהי התכונה החובה בתגית img< מבחינת נגישות ו-SEO?', choicesHE: ['alt - טקסט חלופי המתאר את התמונה', 'title - שם התמונה', 'name - מזהה התמונה', 'description - תיאור התמונה'], correctIndex: 0 },
         { promptHE: 'איזה פורמט תמונה מתאים ביותר ללוגואים שצריכים להישאר חדים בכל גודל?', choicesHE: ['SVG - גרפיקה וקטורית', 'JPG - מתאים לצילומים', 'GIF - מתאים לאנימציות', 'BMP - איכות גבוהה'], correctIndex: 0 },
         { promptHE: 'מה עושה התכונה loading="lazy" בתגית img?', choicesHE: ['טוענת את התמונה רק כשהמשתמש גולל אליה', 'מקטינה את גודל התמונה', 'הופכת את התמונה לשחור-לבן', 'מסירה את המסגרת מהתמונה'], correctIndex: 0 },
       ],
-      5: [
+      6: [
         { promptHE: 'מהי תפקידה של תגית tr< בטבלה?', choicesHE: ['יוצרת שורה חדשה בטבלה (Table Row)', 'יוצרת עמודה בטבלה', 'יוצרת תא נתונים', 'יוצרת כותרת לטבלה'], correctIndex: 0 },
         { promptHE: 'מה ההבדל בין td< ל-th<?', choicesHE: ['th היא תא כותרת (מודגש), td היא תא נתונים רגיל', 'th גדולה יותר מ-td', 'אין הבדל - שתיהן זהות', 'th בשורה הראשונה בלבד'], correctIndex: 0 },
         { promptHE: 'מה עושה התכונה colspan="2"?', choicesHE: ['ממזגת תא על פני 2 עמודות', 'יוצרת 2 עמודות חדשות', 'מחלקת תא ל-2 חלקים', 'מגדירה רוחב של 2 פיקסלים'], correctIndex: 0 },
         { promptHE: 'למה משמשת תגית caption< בטבלה?', choicesHE: ['מוסיפה כותרת / תיאור לטבלה', 'יוצרת שורת סיכום', 'מוסיפה גבול לטבלה', 'מחלקת את הטבלה לחלקים'], correctIndex: 0 },
         { promptHE: 'מתי כדאי להשתמש בתגיות thead<, tbody<, tfoot<?', choicesHE: ['בטבלאות גדולות עם הרבה נתונים לשיפור מבנה וסמנטיקה', 'רק בטבלאות עם פחות מ-5 שורות', 'רק כשיש תמונות בטבלה', 'זה לא מומלץ בכלל'], correctIndex: 0 },
       ],
-      6: [
+      7: [
         { promptHE: 'מהי התכונה החשובה ביותר בתגית form<?', choicesHE: ['action - מגדירה לאן הטופס נשלח', 'input - מגדירה שדות קלט', 'submit - שולחת את הטופס', 'data - מכילה את הנתונים'], correctIndex: 0 },
         { promptHE: 'מה ההבדל בין method="GET" ל-method="POST"?', choicesHE: ['GET שולח דרך URL, POST שולח בצורה מוסתרת', 'GET מהיר יותר', 'POST עובד רק עם תמונות', 'אין הבדל ביניהם'], correctIndex: 0 },
         { promptHE: 'למה חשוב להוסיף תכונת name לשדות קלט?', choicesHE: ['כדי לזהות את הנתונים בשרת', 'כדי לשנות את הצבע', 'כדי להגדיל את השדה', 'זה לא חשוב בכלל'], correctIndex: 0 },
         { promptHE: 'איזה type משמש ליצירת תיבת סיסמה?', choicesHE: ['type="password" - מסתיר את התווים', 'type="hidden"', 'type="secret"', 'type="secure"'], correctIndex: 0 },
         { promptHE: 'מה עושה התכונה required בשדה קלט?', choicesHE: ['מונעת שליחת הטופס אם השדה ריק', 'הופכת את השדה לאדום', 'ממלאת את השדה אוטומטית', 'מוחקת את השדה'], correctIndex: 0 },
       ],
-      7: [
+      8: [
         { promptHE: 'מהו HTML סמנטי?', choicesHE: ['שימוש בתגיות שמתארות את המשמעות של התוכן', 'שימוש בצבעים נכונים', 'כתיבה באנגלית בלבד', 'שימוש בתמונות'], correctIndex: 0 },
         { promptHE: 'למה משמשת תגית header<?', choicesHE: ['אזור עליון של עמוד/חלק עם לוגו וניווט', 'כותרת h1', 'תחתית העמוד', 'תפריט צד'], correctIndex: 0 },
         { promptHE: 'מהו התפקיד של תגית main<?', choicesHE: ['מכילה את התוכן המרכזי והייחודי של העמוד', 'יוצרת תפריט ניווט', 'מגדירה כותרת ראשית', 'מוסיפה תמונת רקע'], correctIndex: 0 },
         { promptHE: 'מה ההבדל בין article< ל-section<?', choicesHE: ['article היא יחידה עצמאית, section מקבצת תוכן קשור', 'article רק לחדשות', 'section רק לתמונות', 'אין הבדל'], correctIndex: 0 },
         { promptHE: 'מדוע HTML סמנטי חשוב?', choicesHE: ['משפר נגישות, SEO והבנת המבנה', 'הופך את האתר ליפה יותר', 'מאיץ את הטעינה פי 10', 'חובה על-פי חוק'], correctIndex: 0 },
       ],
-      8: [
+      9: [
         { promptHE: 'איזו תגית משמשת להטמעת סרטון מקומי בעמוד?', choicesHE: ['video - עם תכונת controls ומקורות source', 'movie', 'film', 'play'], correctIndex: 0 },
         { promptHE: 'מהי התכונה controls בתגיות audio ו-video?', choicesHE: ['מוסיפה כפתורי play, pause ועוצמת שמע', 'שולטת בגודל הסרטון', 'משנה את הצבעים', 'מסתירה את הווידאו'], correctIndex: 0 },
         { promptHE: 'איך מטמיעים סרטון YouTube בעמוד?', choicesHE: ['תגית iframe עם src מ-YouTube (לחצן Share → Embed)', 'תגית video עם קישור YouTube', 'תגית youtube', 'לא אפשרי להטמיע YouTube'], correctIndex: 0 },
         { promptHE: 'למה חשוב להוסיף מספר תגיות source< בתוך video?', choicesHE: ['תמיכה בדפדפנים שונים עם פורמטים שונים', 'כדי להציג מספר סרטונים', 'כדי להגדיל את האיכות', 'זה לא חשוב'], correctIndex: 0 },
         { promptHE: 'מהי התכונה autoplay ומתי לא מומלץ להשתמש בה?', choicesHE: ['מפעילה אוטומטית - לא מומלץ כי מעצבנת משתמשים', 'משפרת את האיכות', 'מאיצה את הטעינה', 'מומלצת תמיד'], correctIndex: 0 },
+      ],
+      10: [
+        { promptHE: 'מה קורה כשכותבים ! ולוחצים Enter ב-VS Code?', choicesHE: ['נוצר מבנה HTML5 מלא אוטומטית', 'נפתח דפדפן חדש', 'נשלחת הודעת שגיאה', 'הקוד נמחק'], correctIndex: 0 },
+        { promptHE: 'מה יוצר הקיצור div.container ב-Emmet?', choicesHE: ['<div class="container"></div>', '<div id="container"></div>', '<container class="div"></container>', '<div>container</div>'], correctIndex: 0 },
+        { promptHE: 'איך יוצרים 5 פריטי רשימה ריקים בקיצור Emmet?', choicesHE: ['ul>li*5 - יוצר רשימה עם 5 li ריקים', 'ul+li*5', 'li*5>ul', 'list*5'], correctIndex: 0 },
+        { promptHE: 'מה עושה Ctrl+D (או Cmd+D) ב-VS Code?', choicesHE: ['בוחר את המופע הבא של המילה ומאפשר עריכה מרובה', 'מוחק שורה', 'משכפל שורה', 'סוגר את הקובץ'], correctIndex: 0 },
+        { promptHE: 'איך יוצרים אלמנט עם ID בקיצור Emmet?', choicesHE: ['div#header - יוצר <div id="header"></div>', 'div.header', 'div@header', 'div:header'], correctIndex: 0 },
       ],
     },
     css: {

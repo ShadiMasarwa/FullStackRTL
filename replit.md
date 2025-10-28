@@ -8,6 +8,7 @@ FullStackEDU is an educational web application for teaching Full-Stack developme
   - **Lesson 2: "הכנת סביבת עבודה ב-VS Code"** - Workspace setup covering folder creation, opening projects in VS Code, creating index.html files, installing useful extensions (Auto Rename Tag, HTML CSS Support, Prettier), and running Live Server.
   - **Lesson 10: "קיצורי דרך ועצות ב-VS Code"** - Productivity tips including the `!` shortcut for HTML5 boilerplate, Emmet abbreviations (div.class, #id, ul>li*5, etc.), essential keyboard shortcuts (Ctrl+S, Ctrl+D for multi-cursor), and best practices for efficient HTML development.
 - **Updated lesson numbering**: Previous lessons 2-8 shifted to 3-9 to accommodate the new lesson 2.
+- **Fixed quiz alignment**: Created dedicated quizzes for lessons 2 and 10, and shifted all quizzes 2-8 to 3-9 to match the updated lesson order. Each lesson now has a quiz matching its specific content.
 
 ## User Preferences
 Preferred communication style: Simple, everyday language.
