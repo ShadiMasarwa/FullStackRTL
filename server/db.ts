@@ -1,8 +1,6 @@
 import mongoose from 'mongoose';
 import { MongoMemoryServer } from 'mongodb-memory-server';
-import dotenv from 'dotenv';
-
-dotenv.config();
+import './config';
 
 let mongoServer: MongoMemoryServer | null = null;
 let isSeeded = false;
